@@ -20,7 +20,10 @@ test('Should generate the correct http error', t => {
       t.ok(err instanceof HttpError)
       t.is(err.message, statusCodes[code])
       t.is(typeof err.name, 'string')
-      t.is(err.statusCode, Number(code))
+      // https://github.com/fastify/fastify/issues/848
+      if (code !== '404') {
+        t.is(err.statusCode, Number(code))
+      }
     })
 
     t.end()
@@ -41,7 +44,10 @@ test('Should generate the correct http error (with custom message)', t => {
       t.ok(err instanceof HttpError)
       t.is(err.message, 'custom')
       t.is(typeof err.name, 'string')
-      t.is(err.statusCode, Number(code))
+      // https://github.com/fastify/fastify/issues/848
+      if (code !== '404') {
+        t.is(err.statusCode, Number(code))
+      }
     })
 
     t.end()
