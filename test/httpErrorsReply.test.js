@@ -26,7 +26,7 @@ test('Should generate the correct http error', t => {
         t.strictEqual(res.statusCode, Number(code))
         t.deepEqual(JSON.parse(res.payload), {
           error: statusCodes[code],
-          message: statusCodes[code],
+          message: code === '500' ? 'Something went wrong' : statusCodes[code],
           statusCode: Number(code)
         })
       })
@@ -56,7 +56,7 @@ test('Should generate the correct http error (with custom message)', t => {
         t.strictEqual(res.statusCode, Number(code))
         t.deepEqual(JSON.parse(res.payload), {
           error: statusCodes[code],
-          message: 'custom',
+          message: code === '500' ? 'Something went wrong' : 'custom',
           statusCode: Number(code)
         })
       })
