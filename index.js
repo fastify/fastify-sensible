@@ -27,8 +27,6 @@ function fastifySensible (fastify, opts, next) {
   // TODO: benchmark if this closure causes some performance drop
   Object.keys(httpErrors).forEach(httpError => {
     fastify.decorateReply(httpError, function (message) {
-      // https://github.com/fastify/fastify/issues/848
-      if (httpError === 'notFound') this.code(404)
       this.send(httpErrors[httpError](message))
     })
   })

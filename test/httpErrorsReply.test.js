@@ -54,11 +54,25 @@ test('Should generate the correct http error (with custom message)', t => {
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, Number(code))
-        t.deepEqual(JSON.parse(res.payload), {
-          error: statusCodes[code],
-          message: code === '500' ? 'Something went wrong' : 'custom',
-          statusCode: Number(code)
-        })
+        if (code === '500') {
+          t.deepEqual(JSON.parse(res.payload), {
+            error: statusCodes[code],
+            message: 'Something went wrong',
+            statusCode: Number(code)
+          })
+        } else if (code === '404') {
+          t.deepEqual(JSON.parse(res.payload), {
+            error: statusCodes[code],
+            message: 'Not Found',
+            statusCode: Number(code)
+          })
+        } else {
+          t.deepEqual(JSON.parse(res.payload), {
+            error: statusCodes[code],
+            message: 'custom',
+            statusCode: Number(code)
+          })
+        }
       })
     })
   })

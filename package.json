@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/delvedor/fastify-sensible#readme",
   "devDependencies": {
-    "fastify": "^1.2.0",
+    "fastify": "^1.2.1",
     "standard": "^11.0.1",
     "tap": "^11.1.3"
   },

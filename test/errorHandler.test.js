@@ -54,7 +54,7 @@ test('The custom error handler should hide the error message for 500s (promise)'
   })
 })
 
-test('SHould hide only 500s', t => {
+test('Should hide only 500s', t => {
   t.plan(3)
 
   const fastify = Fastify()
@@ -78,7 +78,7 @@ test('SHould hide only 500s', t => {
   })
 })
 
-test('SHould hide only 500s (promise)', t => {
+test('Should hide only 500s (promise)', t => {
   t.plan(3)
 
   const fastify = Fastify()
