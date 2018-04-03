@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/delvedor/fastify-sensible.git"
+    "url": "git+https://github.com/fastify/fastify-sensible.git"
   },
   "keywords": [
     "fastify",
@@ -19,9 +19,9 @@
   "author": "Tomas Della Vedova - @delvedor (http://delved.org)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/delvedor/fastify-sensible/issues"
+    "url": "https://github.com/fastify/fastify-sensible/issues"
   },
-  "homepage": "https://github.com/delvedor/fastify-sensible#readme",
+  "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
     "fastify": "^1.2.1",
     "standard": "^11.0.1",
