@@ -104,3 +104,33 @@ test('Should hide only 500s (promise)', t => {
     })
   })
 })
+
+test('Override error handler', t => {
+  t.plan(3)
+
+  const fastify = Fastify()
+  fastify
+    .register(Sensible)
+    .after(() => {
+      fastify.setErrorHandler(function (error, request, reply) {
+        reply.send(error)
+      })
+    })
+
+  fastify.get('/', (req, reply) => {
+    reply.send(new Error('kaboom'))
+  })
+
+  fastify.inject({
+    method: 'GET',
+    url: '/'
+  }, (err, res) => {
+    t.error(err)
+    t.strictEqual(res.statusCode, 500)
+    t.deepEqual(JSON.parse(res.payload), {
+      error: 'Internal Server Error',
+      message: 'kaboom',
+      statusCode: 500
+    })
+  })
+})
