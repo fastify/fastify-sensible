@@ -114,6 +114,14 @@ fastify.get('/', (req, reply) => {
 })
 ```
 
+#### `request.is`
+The `request` interface is decorated with [`jshttp/type-is`](https://github.com/jshttp/type-is), the API is the same, but you don't need to pass the request object.
+```js
+fastify.get('/', (req, reply) => {
+  reply.send(req.is(['html', 'json']))
+})
+```
+
 #### `assert`
 Verify if a given condition is true, if not it throws the specified http error.<br> Very useful if you work with *async* routes.
 ```js
