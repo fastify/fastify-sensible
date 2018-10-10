@@ -31,6 +31,7 @@
     "fast-deep-equal": "^2.0.1",
     "fastify-plugin": "^1.2.1",
     "forwarded": "^0.1.2",
+    "http-errors": "^1.7.1",
     "proxy-addr": "^2.0.4",
     "type-is": "^1.6.16",
     "vary": "^1.1.2"
