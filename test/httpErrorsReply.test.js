@@ -8,6 +8,7 @@ const Sensible = require('../index')
 test('Should generate the correct http error', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400) return
+    if (Number(code) === 418) return
     t.test(code, t => {
       t.plan(3)
       const fastify = Fastify()
@@ -38,6 +39,7 @@ test('Should generate the correct http error', t => {
 test('Should generate the correct http error (with custom message)', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400) return
+    if (Number(code) === 418) return
     t.test(code, t => {
       t.plan(3)
       const fastify = Fastify()

@@ -15,6 +15,8 @@ test('Should generate the correct http error', t => {
 
     Object.keys(statusCodes).forEach(code => {
       if (Number(code) < 400) return
+      if (Number(code) === 418) return
+
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]()
       t.ok(err instanceof HttpError)
@@ -36,6 +38,8 @@ test('Should generate the correct http error (with custom message)', t => {
 
     Object.keys(statusCodes).forEach(code => {
       if (Number(code) < 400) return
+      if (Number(code) === 418) return
+
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]('custom')
       t.ok(err instanceof HttpError)
