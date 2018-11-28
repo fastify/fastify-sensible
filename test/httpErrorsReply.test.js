@@ -8,7 +8,6 @@ const Sensible = require('../index')
 test('Should generate the correct http error', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400) return
-    if (Number(code) === 418) return
     t.test(code, t => {
       t.plan(3)
       const fastify = Fastify()
@@ -39,7 +38,6 @@ test('Should generate the correct http error', t => {
 test('Should generate the correct http error (with custom message)', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400) return
-    if (Number(code) === 418) return
     t.test(code, t => {
       t.plan(3)
       const fastify = Fastify()
@@ -84,6 +82,7 @@ test('Should generate the correct http error (with custom message)', t => {
 function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
   if (code === '505') return 'httpVersionNotSupported'
+  if (code === '418') return 'imateapot'
   msg = msg.split(' ').join('').replace(/'/g, '')
   msg = msg[0].toLowerCase() + msg.slice(1)
   return msg
