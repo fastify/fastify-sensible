@@ -240,7 +240,7 @@ test('Should generate the correct http error', t => {
       t.fail('Should throw')
     } catch (err) {
       t.is(err.message, 'Wrong!')
-      t.is(err.name, 'BadRequest')
+      t.is(err.name, 'BadRequestError')
       t.is(err.statusCode, 400)
     }
   })
