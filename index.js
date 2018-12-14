@@ -31,9 +31,15 @@ function fastifySensible (fastify, opts, next) {
 
   // TODO: benchmark if this closure causes some performance drop
   Object.keys(httpErrors).forEach(httpError => {
-    fastify.decorateReply(httpError, function (message) {
-      this.send(httpErrors[httpError](message))
-    })
+    if (httpError === 'notFound') {
+      fastify.decorateReply(httpError, function (message) {
+        this.callNotFound()
+      })
+    } else {
+      fastify.decorateReply(httpError, function (message) {
+        this.send(httpErrors[httpError](message))
+      })
+    }
   })
 
   fastify.setErrorHandler(function (error, request, reply) {
@@ -45,6 +51,10 @@ function fastifySensible (fastify, opts, next) {
     }
   })
 
+  fastify.setNotFoundHandler(function (request, reply) {
+    reply.send(httpErrors['notFound']('Not Found'))
+  })
+
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
@@ -54,5 +64,5 @@ function fastifySensible (fastify, opts, next) {
 
 module.exports = fp(fastifySensible, {
   name: 'fastify-sensible',
-  fastify: '1.x'
+  fastify: '2.x'
 })

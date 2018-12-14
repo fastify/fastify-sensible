@@ -64,3 +64,4 @@ typings/
 *.swp
 
 package-lock.json
+yarn.lock
