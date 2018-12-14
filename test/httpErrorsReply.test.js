@@ -24,11 +24,20 @@ test('Should generate the correct http error', t => {
       }, (err, res) => {
         t.error(err)
         t.strictEqual(res.statusCode, Number(code))
-        t.deepEqual(JSON.parse(res.payload), {
-          error: statusCodes[code],
-          message: code === '500' ? 'Something went wrong' : statusCodes[code],
-          statusCode: Number(code)
-        })
+        if (code === '418') {
+          // https://github.com/fastify/fastify/blob/b96934d46091bb1c93f55b07149520bb9e5c0729/lib/reply.js#L350-L355
+          t.deepEqual(JSON.parse(res.payload), {
+            error: 'I\'m a Teapot',
+            message: 'I\'m a teapot',
+            statusCode: 418
+          })
+        } else {
+          t.deepEqual(JSON.parse(res.payload), {
+            error: statusCodes[code],
+            message: code === '500' ? 'Something went wrong' : statusCodes[code],
+            statusCode: Number(code)
+          })
+        }
       })
     })
   })
@@ -81,6 +90,7 @@ test('Should generate the correct http error (with custom message)', t => {
 
 function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
+  if (code === '418') return 'imateapot'
   if (code === '505') return 'httpVersionNotSupported'
   msg = msg.split(' ').join('').replace(/'/g, '')
   msg = msg[0].toLowerCase() + msg.slice(1)
