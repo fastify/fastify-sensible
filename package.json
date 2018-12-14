@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
-    "fastify": "^1.12.1",
+    "fastify": "^1.13.2",
     "standard": "^12.0.1",
-    "tap": "^12.0.1"
+    "tap": "^12.1.1"
   },
   "dependencies": {
     "fast-deep-equal": "^2.0.1",
-    "fastify-plugin": "^1.2.1",
+    "fastify-plugin": "^1.3.0",
     "forwarded": "^0.1.2",
     "http-errors": "^1.7.1",
     "proxy-addr": "^2.0.4",
