@@ -20,6 +20,22 @@ test('Should support basic assert', t => {
   })
 })
 
+test('Should support ok assert', t => {
+  t.plan(2)
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.ready(err => {
+    t.error(err)
+    try {
+      fastify.assert.ok(true)
+      t.pass('Works correctly')
+    } catch (err) {
+      t.fail(err)
+    }
+  })
+})
+
 test('Should support equal assert', t => {
   t.plan(2)
   const fastify = Fastify()
