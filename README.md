@@ -8,6 +8,8 @@ This plugins adds some useful utilities to your Fastify instance, see the API se
 *Why these APIs are here and not directly into core?<br>
 Because Fastify aims to be as small and focused as possible, every utility that is not essential should be shipped as standalone plugin.*
 
+Supports Fastify versions `1.x`
+
 ## Install
 ```
 npm i fastify-sensible
