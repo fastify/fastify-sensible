@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
-    "fastify": "next",
+    "fastify": "^2.0.0-rc.2",
     "standard": "^12.0.1",
     "tap": "^12.1.1"
   },
