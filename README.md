@@ -131,6 +131,7 @@ fastify.assert(
 )
 ```
 The `assert` API exposes also the following methods:
+- <code>fastify.assert.<b>ok()</b></code>
 - <code>fastify.assert.<b>equal()</b></code>
 - <code>fastify.assert.<b>notEqual()</b></code>
 - <code>fastify.assert.<b>strictEqual()</b></code>
