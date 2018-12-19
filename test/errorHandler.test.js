@@ -32,7 +32,7 @@ test('The custom error handler can be disabled', t => {
   t.plan(3)
 
   const fastify = Fastify()
-  fastify.register(Sensible, { redactErrors: false })
+  fastify.register(Sensible, { errorHandler: false })
 
   fastify.get('/', (req, reply) => {
     reply.send(new Error('kaboom'))

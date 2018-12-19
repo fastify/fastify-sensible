@@ -36,7 +36,7 @@ function fastifySensible (fastify, opts, next) {
     })
   })
 
-  if (opts.redactErrors !== false) {
+  if (opts.errorHandler !== false) {
     fastify.setErrorHandler(function (error, request, reply) {
       if (reply.res.statusCode === 500) {
         request.log.error(error)
