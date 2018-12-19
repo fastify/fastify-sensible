@@ -72,12 +72,6 @@ test('Should generate the correct http error (with custom message)', t => {
             message: 'Something went wrong',
             statusCode: Number(code)
           })
-        } else if (code === '404') {
-          t.deepEqual(JSON.parse(res.payload), {
-            error: statusCodes[code],
-            message: 'Not Found',
-            statusCode: Number(code)
-          })
         } else {
           t.deepEqual(JSON.parse(res.payload), {
             error: statusCodes[code],
