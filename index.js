@@ -36,14 +36,16 @@ function fastifySensible (fastify, opts, next) {
     })
   })
 
-  fastify.setErrorHandler(function (error, request, reply) {
-    if (reply.res.statusCode === 500) {
-      request.log.error(error)
-      reply.send(new Error('Something went wrong'))
-    } else {
-      reply.send(error)
-    }
-  })
+  if (opts.errorHandler !== false) {
+    fastify.setErrorHandler(function (error, request, reply) {
+      if (reply.res.statusCode === 500) {
+        request.log.error(error)
+        reply.send(new Error('Something went wrong'))
+      } else {
+        reply.send(error)
+      }
+    })
+  }
 
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])

@@ -151,6 +151,7 @@ const [err, user] = await fastify.to(
 #### Custom error handler
 This plugins also adds a custom error handler which hides the error message in case of `500` errors, instead it returns `Something went wrong`.<br>
 This is especially useful if you are using *async* routes, where every uncaught error will be sent back to the user *(but dot not worry, the original error message is logged as error in any case)*.
+If needed, it can be disabled by setting the option `errorHandler` to `false`.
 
 ## Contributing
 Do you feel there is some utility that *everyone can agree on* which is not present?<br>
