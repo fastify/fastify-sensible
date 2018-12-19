@@ -28,6 +28,30 @@ test('The custom error handler should hide the error message for 500s', t => {
   })
 })
 
+test('The custom error handler can be disabled', t => {
+  t.plan(3)
+
+  const fastify = Fastify()
+  fastify.register(Sensible, { redactErrors: false })
+
+  fastify.get('/', (req, reply) => {
+    reply.send(new Error('kaboom'))
+  })
+
+  fastify.inject({
+    method: 'GET',
+    url: '/'
+  }, (err, res) => {
+    t.error(err)
+    t.strictEqual(res.statusCode, 500)
+    t.deepEqual(JSON.parse(res.payload), {
+      error: 'Internal Server Error',
+      message: 'kaboom',
+      statusCode: 500
+    })
+  })
+})
+
 test('The custom error handler should hide the error message for 500s (promise)', t => {
   t.plan(3)
 
