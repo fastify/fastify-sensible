@@ -155,7 +155,7 @@ This plugins also adds a custom error handler which hides the error message in c
 This is especially useful if you are using *async* routes, where every uncaught error will be sent back to the user *(but do not worry, the original error message is logged as error in any case)*.
 If needed, it can be disabled by setting the option `errorHandler` to `false`.
 
-If you return a `500` error via the API provided on `fastify.httpErrors` and `reply` objects, the custom text is always preserved.
+If you return a `500` error via the API provided on `fastify.httpErrors` and `reply` objects, the custom error message is preserved and returned in the HTTP response body.
 
 ## Contributing
 Do you feel there is some utility that *everyone can agree on* which is not present?<br>
