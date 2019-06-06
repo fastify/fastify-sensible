@@ -4,7 +4,7 @@
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
   "scripts": {
-    "test": "standard && tap test/*.test.js"
+    "test": "standard && tap test/*.test.js && tsc --project ./tsconfig.json"
   },
   "repository": {
     "type": "git",
