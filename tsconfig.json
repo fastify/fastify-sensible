@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "extendedDiagnostics": true
+  },
+  "files": [
+    "./test/types.test.ts"
+  ]
+}
