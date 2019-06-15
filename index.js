@@ -38,7 +38,7 @@ function fastifySensible (fastify, opts, next) {
 
   if (opts.errorHandler !== false) {
     fastify.setErrorHandler(function (error, request, reply) {
-      if (reply.res.statusCode === 500) {
+      if (reply.res.statusCode === 500 && error.explicitInternalServerError !== true) {
         request.log.error(error)
         reply.send(new Error('Something went wrong'))
       } else {
