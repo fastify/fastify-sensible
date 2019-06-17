@@ -1,68 +1,102 @@
-interface Error {
-  stack?: string;
-}
-
 interface HttpError extends Error {
   status: number;
   statusCode: number;
   expose: boolean;
   headers?: {
-      [key: string]: string;
+    [key: string]: string;
   };
   [key: string]: any;
 }
 
-type HttpErrorConstructor = new (msg?: string) => HttpError;
+type HttpErrorCodes = 400 | '401' // BadRequest
+                    | 401 | '401' // Unauthorized
+                    | 402 | '402' // PaymentRequired
+                    | 403 | '403' // Forbidden
+                    | 404 | '404' // NotFound
+                    | 405 | '405' // MethodNotAllowed
+                    | 406 | '406' // NotAcceptable
+                    | 407 | '407' // ProxyAuthenticationRequired
+                    | 408 | '408' // RequestTimeout
+                    | 409 | '409' // Conflict
+                    | 410 | '410' // Gone
+                    | 411 | '411' // LengthRequired
+                    | 412 | '412' // PreconditionFailed
+                    | 413 | '413' // PayloadTooLarge
+                    | 414 | '414' // URITooLong
+                    | 415 | '415' // UnsupportedMediaType
+                    | 416 | '416' // RangeNotSatisfiable
+                    | 417 | '417' // ExpectationFailed
+                    | 418 | '418' // ImATeapot
+                    | 421 | '421' // MisdirectedRequest
+                    | 422 | '422' // UnprocessableEntity
+                    | 423 | '423' // Locked
+                    | 424 | '424' // FailedDependency
+                    | 425 | '425' // UnorderedCollection
+                    | 426 | '426' // UpgradeRequired
+                    | 428 | '428' // PreconditionRequired
+                    | 429 | '429' // TooManyRequests
+                    | 431 | '431' // RequestHeaderFieldsTooLarge
+                    | 451 | '451' // UnavailableForLegalReasons
+                    | 500 | '500' // InternalServerError
+                    | 501 | '501' // NotImplemented
+                    | 502 | '502' // BadGateway
+                    | 503 | '503' // ServiceUnavailable
+                    | 504 | '504' // GatewayTimeout
+                    | 505 | '505' // HTTPVersionNotSupported
+                    | 506 | '506' // VariantAlsoNegotiates
+                    | 507 | '507' // InsufficientStorage
+                    | 508 | '508' // LoopDetected
+                    | 509 | '509' // BandwidthLimitExceeded
+                    | 510 | '510' // NotExtended
+                    | 511 | '511' // NetworkAuthenticationRequire
 
-export type HttpErrorType = {
-    badRequest(message?: string): HttpError;
-    unauthorized(message?: string): HttpError;
-    paymentRequired(message?: string): HttpError;
-    forbidden(message?: string): HttpError;
-    notFound(message?: string): HttpError;
-    methodNotAllowed(message?: string): HttpError;
-    notAcceptable(message?: string): HttpError;
-    proxyAuthenticationRequired(message?: string): HttpError;
-    requestTimeout(message?: string): HttpError;
-    conflict(message?: string): HttpError;
-    gone(message?: string): HttpError;
-    lengthRequired(message?: string): HttpError;
-    preconditionFailed(message?: string): HttpError;
-    payloadTooLarge(message?: string): HttpError;
-    uriTooLong(message?: string): HttpError;
-    unsupportedMediaType(message?: string): HttpError;
-    rangeNotSatisfiable(message?: string): HttpError;
-    expectationFailed(message?: string): HttpError;
-    imateapot(message?: string): HttpError;
-    misdirectedRequest(message?: string): HttpError;
-    unprocessableEntity(message?: string): HttpError;
-    locked(message?: string): HttpError;
-    failedDependency(message?: string): HttpError;
-    unorderedCollection(message?: string): HttpError;
-    upgradeRequired(message?: string): HttpError;
-    preconditionRequired(message?: string): HttpError;
-    tooManyRequests(message?: string): HttpError;
-    requestHeaderFieldsTooLarge(message?: string): HttpError;
-    unavailableForLegalReasons(message?: string): HttpError;
-    internalServerError(message?: string): HttpError;
-    notImplemented(message?: string): HttpError;
-    badGateway(message?: string): HttpError;
-    serviceUnavailable(message?: string): HttpError;
-    gatewayTimeout(message?: string): HttpError;
-    httpVersionNotSupported(message?: string): HttpError;
-    variantAlsoNegotiates(message?: string): HttpError;
-    insufficientStorage(message?: string): HttpError;
-    loopDetected(message?: string): HttpError;
-    bandwidthLimitExceeded(message?: string): HttpError;
-    notExtended(message?: string): HttpError;
-    networkAuthenticationRequired(
-      message?: string,
-    ): HttpError;
+type HttpErrorNames = 'badRequest'
+                    | 'unauthorized'
+                    | 'paymentRequired'
+                    | 'forbidden'
+                    | 'notFound'
+                    | 'methodNotAllowed'
+                    | 'notAcceptable'
+                    | 'proxyAuthenticationRequired'
+                    | 'requestTimeout'
+                    | 'conflict'
+                    | 'gone'
+                    | 'lengthRequired'
+                    | 'preconditionFailed'
+                    | 'payloadTooLarge'
+                    | 'uriTooLong'
+                    | 'unsupportedMediaType'
+                    | 'rangeNotSatisfiable'
+                    | 'expectationFailed'
+                    | 'imateapot'
+                    | 'misdirectedRequest'
+                    | 'unprocessableEntity'
+                    | 'locked'
+                    | 'failedDependency'
+                    | 'unorderedCollection'
+                    | 'upgradeRequired'
+                    | 'preconditionRequired'
+                    | 'tooManyRequests'
+                    | 'requestHeaderFieldsTooLarge'
+                    | 'unavailableForLegalReasons'
+                    | 'internalServerError'
+                    | 'notImplemented'
+                    | 'badGateway'
+                    | 'serviceUnavailable'
+                    | 'gatewayTimeout'
+                    | 'httpVersionNotSupported'
+                    | 'variantAlsoNegotiates'
+                    | 'insufficientStorage'
+                    | 'loopDetected'
+                    | 'bandwidthLimitExceeded'
+                    | 'notExtended'
+                    | 'networkAuthenticationRequired';
 
-    getHttpError: (code?: number | string, message?: string) => string;
-    HttpError: HttpErrorConstructor;
-};
+export type HttpErrors = {
+  HttpError: HttpError;
+  getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
+} & Record<HttpErrorNames, (msg?: string) => HttpError>;
 
-export interface HttpErrors {
-    httpError: HttpErrorType;
-}
+export type HttpErrorReplys = {
+  getHttpError: (code: HttpErrorCodes, message?: string) => void;
+} & Record<HttpErrorNames, (msg?: string) => void>;
