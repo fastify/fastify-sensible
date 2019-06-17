@@ -31,9 +31,20 @@ function fastifySensible (fastify, opts, next) {
 
   // TODO: benchmark if this closure causes some performance drop
   Object.keys(httpErrors).forEach(httpError => {
-    fastify.decorateReply(httpError, function (message) {
-      this.send(httpErrors[httpError](message))
-    })
+    switch (httpError) {
+      case 'HttpError':
+        // skip abstract class constructor
+        break
+      case 'getHttpError':
+        fastify.decorateReply('getHttpError', function (errorCode, message) {
+          this.send(httpErrors['getHttpError'](errorCode, message))
+        })
+        break
+      default:
+        fastify.decorateReply(httpError, function (message) {
+          this.send(httpErrors[httpError](message))
+        })
+    }
   })
 
   if (opts.errorHandler !== false) {
