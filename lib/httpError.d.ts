@@ -8,7 +8,7 @@ interface HttpError extends Error {
   [key: string]: any;
 }
 
-type HttpErrorCodes = 400 | '401' // BadRequest
+type HttpErrorCodes = 400 | '400' // BadRequest
                     | 401 | '401' // Unauthorized
                     | 402 | '402' // PaymentRequired
                     | 403 | '403' // Forbidden
