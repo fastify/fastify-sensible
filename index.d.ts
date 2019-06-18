@@ -1,6 +1,6 @@
 import * as fastify from "fastify";
 import * as http from "http";
-import { HttpErrors } from "./lib/httpError";
+import { HttpErrors, HttpErrorReplys } from "./lib/httpError";
 
 declare module "fastify" {
   namespace SensibleTypes {
@@ -48,12 +48,13 @@ declare module "fastify" {
     <T>(to: Promise<T>): Promise<SensibleTypes.ToType<T>>;
   }
 
-  interface FastifyInstance extends HttpErrors {
+  interface FastifyInstance {
     assert: Assert;
     to: To;
+    httpErrors: HttpErrors;
   }
 
-  interface FastifyReply<HttpResponse> {
+  interface FastifyReply<HttpResponse> extends HttpErrorReplys {
     vary: {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
@@ -80,5 +81,4 @@ declare const fastifySensible: fastify.Plugin<
   {}
 >;
 
-export { HttpErrorType } from "./lib/httpError";
-export default fastifySensible;
+export = fastifySensible;

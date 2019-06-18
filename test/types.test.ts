@@ -1,5 +1,5 @@
 import * as fastify from "fastify";
-import fastifySensible from "../index";
+import * as fastifySensible from "..";
 
 const app = fastify();
 
@@ -105,16 +105,16 @@ app.get("/", (req, reply) => {
 // 'httpError' types test
 app.addHook("preHandler", async (request, reply) => {
   try {
-    await app.httpError.getHttpError(400);
-    await app.httpError.badGateway();
+    await app.httpErrors.getHttpError(400);
+    await app.httpErrors.badGateway();
   } catch {
-    const err = app.httpError["imateapot"]("custom");
+    const err = app.httpErrors["imateapot"]("custom");
     reply.send(err);
   }
 });
 
 app.addHook("onError", (request, reply, error, next) => {
-  const err = app.httpError["imateapot"]("custom");
+  const err = app.httpErrors["imateapot"]("custom");
   reply.send(err);
 });
 
