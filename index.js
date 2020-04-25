@@ -37,7 +37,7 @@ function fastifySensible (fastify, opts, next) {
         break
       case 'getHttpError':
         fastify.decorateReply('getHttpError', function (errorCode, message) {
-          this.send(httpErrors['getHttpError'](errorCode, message))
+          this.send(httpErrors.getHttpError(errorCode, message))
         })
         break
       default:
@@ -49,7 +49,7 @@ function fastifySensible (fastify, opts, next) {
 
   if (opts.errorHandler !== false) {
     fastify.setErrorHandler(function (error, request, reply) {
-      if (reply.res.statusCode === 500 && error.explicitInternalServerError !== true) {
+      if (reply.raw.statusCode === 500 && error.explicitInternalServerError !== true) {
         request.log.error(error)
         reply.send(new Error('Something went wrong'))
       } else {
@@ -67,5 +67,5 @@ function fastifySensible (fastify, opts, next) {
 
 module.exports = fp(fastifySensible, {
   name: 'fastify-sensible',
-  fastify: '2.x'
+  fastify: '>=3.x'
 })
