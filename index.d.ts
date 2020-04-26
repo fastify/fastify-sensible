@@ -43,13 +43,9 @@ declare module 'fastify' {
     ): string;
   }
 
-  interface To {
-    <T>(to: Promise<T>): Promise<SensibleTypes.ToType<T>>;
-  }
-
   interface FastifyInstance {
     assert: Assert;
-    to: To;
+    to<T>(to: Promise<T>): Promise<SensibleTypes.ToType<T>>;
     httpErrors: HttpErrors;
   }
 

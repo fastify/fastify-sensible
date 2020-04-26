@@ -1,3 +1,4 @@
+import { expectType, expectAssignable } from 'tsd'
 import fastify from 'fastify'
 import fastifySensible from '.'
 
@@ -8,17 +9,17 @@ app.register(fastifySensible, {
 })
 
 app.get('/', (req, reply) => {
-  reply.notFound()
+  expectAssignable<void>(reply.notFound())
 })
 
 app.get('/', async (req, reply) => {
-  throw app.httpErrors.notFound()
+  expectAssignable<Error>(app.httpErrors.notFound())
 })
 
 app.get('/', async (req, reply) => {
-  app.assert.equal(1, 2)
+  expectType<string>(app.assert.equal(1, 2))
 })
 
 app.get('/', async (req, reply) => {
-  const [err, res] = await app.to(new Promise(resolve => resolve()))
+  expectType<Promise<[Error, void]>>(app.to<void>(new Promise(resolve => resolve())))
 })
