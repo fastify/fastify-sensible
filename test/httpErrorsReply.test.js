@@ -8,6 +8,14 @@ const Sensible = require('../index')
 // from Node.js v10 and above the 418 message has been changed
 const node10 = Number(process.versions.node.split('.')[0]) >= 10
 
+// fix unsupported status codes
+const unsupported = [425]
+for (const code in statusCodes) {
+  if (unsupported.includes(Number(code))) {
+    delete statusCodes[code]
+  }
+}
+
 test('Should generate the correct http error', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400) return
