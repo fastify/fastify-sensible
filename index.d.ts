@@ -1,8 +1,7 @@
-import * as fastify from "fastify";
-import * as http from "http";
-import { HttpErrors, HttpErrorReplys } from "./lib/httpError";
+import { FastifyPlugin  } from 'fastify'
+import { HttpErrors, HttpErrorReplys } from "./lib/httpError"
 
-declare module "fastify" {
+declare module 'fastify' {
   namespace SensibleTypes {
     type ToType<T> = [Error, T];
     type Address = "loopback" | "linklocal" | "uniquelocal" | string;
@@ -44,24 +43,20 @@ declare module "fastify" {
     ): string;
   }
 
-  interface To {
-    <T>(to: Promise<T>): Promise<SensibleTypes.ToType<T>>;
-  }
-
   interface FastifyInstance {
     assert: Assert;
-    to: To;
+    to<T>(to: Promise<T>): Promise<SensibleTypes.ToType<T>>;
     httpErrors: HttpErrors;
   }
 
-  interface FastifyReply<HttpResponse> extends HttpErrorReplys {
+  interface FastifyReplyInterface extends HttpErrorReplys {
     vary: {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
     };
   }
 
-  interface FastifyRequest<HttpRequest> {
+  interface FastifyRequestInterface {
     forwarded(): string[];
     proxyaddr(
       trust:
@@ -74,11 +69,9 @@ declare module "fastify" {
   }
 }
 
-declare const fastifySensible: fastify.Plugin<
-  http.Server,
-  http.IncomingMessage,
-  http.ServerResponse,
-  {}
->;
+export interface SensibleOptions {
+  errorHandler?: boolean
+}
 
-export = fastifySensible;
+declare const fastifySensible: FastifyPlugin<SensibleOptions>
+export default fastifySensible;

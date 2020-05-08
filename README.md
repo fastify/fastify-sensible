@@ -1,6 +1,6 @@
 # fastify-sensible
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  [![Build Status](https://travis-ci.org/fastify/fastify-sensible.svg?branch=master)](https://travis-ci.org/fastify/fastify-sensible)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](http://standardjs.com/)  ![Node CI](https://github.com/fastify/fastify-sensible/workflows/Node%20CI/badge.svg)
 
 Defaults for Fastify that everyone can agree on™.<br>
 This plugin adds some useful utilities to your Fastify instance, see the API section to learn more.
