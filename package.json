@@ -34,7 +34,6 @@
     "fastify-plugin": "^2.0.0",
     "forwarded": "^0.1.2",
     "http-errors": "^1.7.3",
-    "proxy-addr": "^2.0.6",
     "type-is": "^1.6.18",
     "vary": "^1.1.2"
   },

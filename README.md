@@ -108,14 +108,6 @@ fastify.get('/', (req, reply) => {
 })
 ```
 
-#### `request.proxyaddr`
-The `request` interface is decorated with [`jshttp/proxy-addr`](https://github.com/jshttp/proxy-addr), the API is the same, but you don't need to pass the request object.
-```js
-fastify.get('/', (req, reply) => {
-  reply.send(req.proxyaddr(addr => addr === '127.0.0.1'))
-})
-```
-
 #### `request.is`
 The `request` interface is decorated with [`jshttp/type-is`](https://github.com/jshttp/type-is), the API is the same, but you don't need to pass the request object.
 ```js

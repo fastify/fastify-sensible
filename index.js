@@ -3,7 +3,6 @@
 const fp = require('fastify-plugin')
 // External utilities
 const forwarded = require('forwarded')
-const proxyaddr = require('proxy-addr')
 const typeis = require('type-is')
 // Internals Utilities
 const httpErrors = require('./lib/httpErrors')
@@ -17,10 +16,6 @@ function fastifySensible (fastify, opts, next) {
 
   fastify.decorateRequest('forwarded', function () {
     return forwarded(this.raw)
-  })
-
-  fastify.decorateRequest('proxyaddr', function (trust) {
-    return proxyaddr(this.raw, trust)
   })
 
   fastify.decorateRequest('is', function (types) {
