@@ -4,7 +4,6 @@ import { HttpErrors, HttpErrorReplys } from "./lib/httpError"
 declare module 'fastify' {
   namespace SensibleTypes {
     type ToType<T> = [Error, T];
-    type Address = "loopback" | "linklocal" | "uniquelocal" | string;
   }
 
   interface Assert {
@@ -58,12 +57,6 @@ declare module 'fastify' {
 
   interface FastifyRequestInterface {
     forwarded(): string[];
-    proxyaddr(
-      trust:
-        | SensibleTypes.Address
-        | SensibleTypes.Address[]
-        | ((addr: string, i: number) => boolean)
-    ): string;
     is(types: Array<string>): string | false | null;
     is(...types: Array<string>): string | false | null;
   }
