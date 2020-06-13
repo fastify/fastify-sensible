@@ -48,14 +48,14 @@ declare module 'fastify' {
     httpErrors: HttpErrors;
   }
 
-  interface FastifyReplyInterface extends HttpErrorReplys {
+  interface FastifyReply extends HttpErrorReplys {
     vary: {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
     };
   }
 
-  interface FastifyRequestInterface {
+  interface FastifyRequest {
     forwarded(): string[];
     is(types: Array<string>): string | false | null;
     is(...types: Array<string>): string | false | null;
