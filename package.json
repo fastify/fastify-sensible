@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
-    "fastify": "^3.0.0-rc.4",
+    "fastify": "^3.0.0",
     "standard": "^14.3.3",
     "tap": "^14.10.7",
     "tsd": "^0.13.1"
