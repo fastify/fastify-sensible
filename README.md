@@ -36,7 +36,7 @@ fastify.listen(3000)
 #### `fastify.httpErrors`
 Object that exposes `createError` and all the `4xx` and `5xx` error constructors.
 
-Usage of `4xx` and `5xx` error constructors, follows the same structure as [`new createError[code || name]([msg]))`](https://github.com/jshttp/http-errors#new-createerrorcode--namemsg) in [http-errors](https://github.com/jshttp/http-errors):
+Usage of `4xx` and `5xx` error constructors follows the same structure as [`new createError[code || name]([msg]))`](https://github.com/jshttp/http-errors#new-createerrorcode--namemsg) in [http-errors](https://github.com/jshttp/http-errors):
 
 ```js
  // the custom message is optional
