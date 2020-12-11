@@ -1,6 +1,7 @@
 'use strict'
 
 const { test } = require('tap')
+const createError = require('http-errors')
 const statusCodes = require('http').STATUS_CODES
 const Fastify = require('fastify')
 const Sensible = require('../index')
@@ -36,6 +37,33 @@ test('Should generate the correct http error', t => {
       t.is(err.statusCode, Number(code))
     })
 
+    t.end()
+  })
+})
+
+test('Should expose the createError method from http-errors', t => {
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.ready(err => {
+    t.error(err)
+
+    t.is(fastify.httpErrors.createError, createError)
+    t.end()
+  })
+})
+
+test('Should generate the correct error using the properties given', t => {
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.ready(err => {
+    t.error(err)
+    const customError = fastify.httpErrors.createError(404, 'This video does not exist!')
+    t.ok(customError instanceof HttpError)
+    t.is(customError.message, 'This video does not exist!')
+    t.is(typeof customError.name, 'string')
+    t.is(customError.statusCode, 404)
     t.end()
   })
 })

@@ -34,12 +34,15 @@ fastify.listen(3000)
 ```
 ## API
 #### `fastify.httpErrors`
-Object that exposes all the `4xx` and `5xx` error constructors:
-usage:
+Object that exposes `createError` and all the `4xx` and `5xx` error constructors.
+
+Usage of `4xx` and `5xx` error constructors follows the same structure as [`new createError[code || name]([msg]))`](https://github.com/jshttp/http-errors#new-createerrorcode--namemsg) in [http-errors](https://github.com/jshttp/http-errors):
+
 ```js
  // the custom message is optional
 const notFoundErr = fastify.httpErrors.notFound('custom message')
 ```
+
 `4xx`
 - <code>fastify.httpErrors.<b>badRequest()</b></code>
 - <code>fastify.httpErrors.<b>unauthorized()</b></code>
@@ -84,6 +87,14 @@ const notFoundErr = fastify.httpErrors.notFound('custom message')
 - <code>fastify.httpErrors.<b>bandwidthLimitExceeded()</b></code>
 - <code>fastify.httpErrors.<b>notExtended()</b></code>
 - <code>fastify.httpErrors.<b>networkAuthenticationRequired()</b></code>
+
+`createError`
+
+Usage of `createError` follows the same structure as [`createError([status], [message], [properties])`](https://github.com/jshttp/http-errors#createerrorstatus-message-properties) in [http-errors](https://github.com/jshttp/http-errors):
+
+```js
+var err = fastify.httpErrors.createError(404, 'This video does not exist!')
+```
 
 #### `reply.[httpError]`
 The `reply` interface is decorated with all the functions declared above, use it is very easy:
