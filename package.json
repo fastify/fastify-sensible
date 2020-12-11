@@ -1,6 +1,6 @@
 {
   "name": "fastify-sensible",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
   "scripts": {
