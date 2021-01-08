@@ -113,6 +113,48 @@ fastify.get('/', (req, reply) => {
 })
 ```
 
+#### `reply.cacheControl`
+The `reply` interface is decorated an helper to configure cache control response headers.
+```js
+// configure a single type
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('public')
+  reply.send('ok')
+})
+
+// configure multiple types
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('public')
+  reply.cacheControl('immutable')
+  reply.send('ok')
+})
+
+// configure a type value
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('max-age', 42)
+  reply.send('ok')
+})
+```
+
+#### `reply.noCache`
+The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+```js
+fastify.get('/', (req, reply) => {
+  reply.noCache() // will set to 'no-store, max-age=0'
+  reply.send('ok')
+})
+```
+
+#### `reply.stale`
+The `reply` interface is decorated an helper to set the cache control header for [stale content](https://tools.ietf.org/html/rfc5861).
+```js
+fastify.get('/', (req, reply) => {
+  reply.stale('while-revalidate', 42)
+  reply.stale('if-error', 1)
+  reply.send('ok')
+})
+```
+
 #### `request.forwarded`
 The `request` interface is decorated with [`jshttp/forwarded`](https://github.com/jshttp/forwarded), the API is the same, but you don't need to pass the request object.
 ```js
