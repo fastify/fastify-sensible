@@ -1,15 +1,16 @@
 import { FastifyPlugin  } from 'fastify'
 import { HttpErrors, HttpErrorReplys } from "./lib/httpError"
 
-type cacheControlTypes = 'must-revalidate' |
+type singleValueTypes = 'must-revalidate' |
   'no-cache' |
   'no-store' |
   'no-transform' |
   'public' |
   'private' |
   'proxy-revalidate' |
-  'immutable' |
-  'max-age' |
+  'immutable'
+
+type multiValueTypes = 'max-age' |
   's-maxage' |
   'stale-while-revalidate' |
   'stale-if-error'
@@ -68,7 +69,8 @@ declare module 'fastify' {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
     };
-    cacheControl(type: cacheControlTypes, value?: number): this
+    cacheControl(type: singleValueTypes): this
+    cacheControl(type: multiValueTypes, value: number): this
     noCache(): this
     stale(type: staleTypes, value: number): this
   }
