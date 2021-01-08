@@ -1,6 +1,21 @@
 import { FastifyPlugin  } from 'fastify'
 import { HttpErrors, HttpErrorReplys } from "./lib/httpError"
 
+type cacheControlTypes = 'must-revalidate' |
+  'no-cache' |
+  'no-store' |
+  'no-transform' |
+  'public' |
+  'private' |
+  'proxy-revalidate' |
+  'immutable' |
+  'max-age' |
+  's-maxage' |
+  'stale-while-revalidate' |
+  'stale-if-error'
+
+type staleTypes = 'while-revalidate' | 'if-error'
+
 declare module 'fastify' {
   namespace SensibleTypes {
     type ToType<T> = [Error, T];
@@ -53,6 +68,9 @@ declare module 'fastify' {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
     };
+    cacheControl(type: cacheControlTypes, value?: number): this
+    noCache(): this
+    stale(type: staleTypes, value: number): this
   }
 
   interface FastifyRequest {
