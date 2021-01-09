@@ -75,7 +75,7 @@ declare module 'fastify' {
     maxAge(type: number | string): this
     revalidate(): this
     staticCache(time: number | string): this
-    stale(type: staleTypes, time: number): this
+    stale(type: staleTypes, time: number | string): this
   }
 
   interface FastifyRequest {
