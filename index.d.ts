@@ -70,9 +70,12 @@ declare module 'fastify' {
       append: (header: string, field: string | string[]) => string;
     };
     cacheControl(type: singleValueTypes): this
-    cacheControl(type: multiValueTypes, value: number): this
-    noCache(): this
-    stale(type: staleTypes, value: number): this
+    cacheControl(type: multiValueTypes, time: number | string): this
+    preventCache(): this
+    maxAge(type: number | string): this
+    revalidate(): this
+    staticCache(time: number | string): this
+    stale(type: staleTypes, time: number): this
   }
 
   interface FastifyRequest {

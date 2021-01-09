@@ -25,8 +25,11 @@ function fastifySensible (fastify, opts, next) {
 
   fastify.decorateReply('vary', vary)
   fastify.decorateReply('cacheControl', cache.cacheControl)
-  fastify.decorateReply('noCache', cache.noCache)
+  fastify.decorateReply('preventCache', cache.preventCache)
+  fastify.decorateReply('revalidate', cache.revalidate)
+  fastify.decorateReply('staticCache', cache.staticCache)
   fastify.decorateReply('stale', cache.stale)
+  fastify.decorateReply('maxAge', cache.maxAge)
 
   // TODO: benchmark if this closure causes some performance drop
   Object.keys(httpErrors).forEach(httpError => {

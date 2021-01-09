@@ -29,7 +29,7 @@ app.get('/', (req, reply) => {
 })
 
 app.get('/', (req, reply) => {
-  expectAssignable<typeof reply>(reply.noCache())
+  expectAssignable<typeof reply>(reply.preventCache())
 })
 
 app.get('/', (req, reply) => {
