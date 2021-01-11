@@ -137,6 +137,7 @@ fastify.get('/', (req, reply) => {
 
 // the time can be defined as string
 fastify.get('/', (req, reply) => {
+  // all the formats of github.com/vercel/ms are supported
   reply.cacheControl('max-age', '1d') // will set to 'max-age=86400'
   reply.send('ok')
 })
