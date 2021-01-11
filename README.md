@@ -253,4 +253,4 @@ The project name is inspired by [`vim-sensible`](https://github.com/tpope/vim-se
 ## License
 
 MIT
-Copyright © 2021 Tomas Della Vedova
+Copyright © 2018-2021 Tomas Della Vedova
