@@ -8,6 +8,8 @@ interface HttpError extends Error {
   [key: string]: any;
 }
 
+type UnknownError = Error | string | number | { [key: string]: any };
+
 type HttpErrorCodes = 400 | '400' // BadRequest
                     | 401 | '401' // Unauthorized
                     | 402 | '402' // PaymentRequired
@@ -95,6 +97,7 @@ type HttpErrorNames = 'badRequest'
 export type HttpErrors = {
   HttpError: HttpError;
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
+  createError: (...args: UnknownError[]) => HttpError;
 } & Record<HttpErrorNames, (msg?: string) => HttpError>;
 
 export type HttpErrorReplys = {

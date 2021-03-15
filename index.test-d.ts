@@ -12,6 +12,10 @@ app.get('/', (req, reply) => {
   expectAssignable<void>(reply.notFound())
 })
 
+app.get('/', (req, reply) => {
+  expectAssignable<Error>(app.httpErrors.createError(405, 'Method Not Allowed'))
+})
+
 app.get('/', async (req, reply) => {
   expectAssignable<Error>(app.httpErrors.notFound())
 })
