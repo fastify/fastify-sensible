@@ -20,8 +20,8 @@ test('request.is API', t => {
     payload: { foo: 'bar' }
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.deepEqual(
+    t.equal(res.statusCode, 200)
+    t.same(
       res.payload,
       'json'
     )
@@ -44,8 +44,8 @@ test('request.is API (with array)', t => {
     payload: { foo: 'bar' }
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.deepEqual(
+    t.equal(res.statusCode, 200)
+    t.same(
       res.payload,
       'json'
     )

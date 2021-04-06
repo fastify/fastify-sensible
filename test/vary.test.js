@@ -22,9 +22,9 @@ test('reply.vary API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers.vary, 'Accept, Origin, User-Agent')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -35,7 +35,7 @@ test('reply.vary.append API', t => {
   fastify.register(Sensible)
 
   fastify.get('/', (req, reply) => {
-    t.strictEqual(
+    t.equal(
       reply.vary.append('', ['Accept', 'Accept-Language']), 'Accept, Accept-Language'
     )
     reply.send('ok')
@@ -46,7 +46,7 @@ test('reply.vary.append API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.payload, 'ok')
   })
 })

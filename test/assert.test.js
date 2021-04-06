@@ -188,7 +188,7 @@ test('Should support strict equal assert (throw)', t => {
   fastify.ready(err => {
     t.error(err)
     try {
-      fastify.assert.strictEqual(1, 2)
+      fastify.assert.equal(1, 2)
       t.fail('Should throw')
     } catch (err) {
       t.ok(err)
@@ -255,9 +255,9 @@ test('Should generate the correct http error', t => {
       fastify.assert(false, 400, 'Wrong!')
       t.fail('Should throw')
     } catch (err) {
-      t.is(err.message, 'Wrong!')
-      t.is(err.name, 'BadRequestError')
-      t.is(err.statusCode, 400)
+      t.equal(err.message, 'Wrong!')
+      t.equal(err.name, 'BadRequestError')
+      t.equal(err.statusCode, 400)
     }
   })
 })

@@ -19,8 +19,8 @@ test('The custom error handler should hide the error message for 500s', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 500)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 500)
+    t.same(JSON.parse(res.payload), {
       error: 'Internal Server Error',
       message: 'Something went wrong',
       statusCode: 500
@@ -43,8 +43,8 @@ test('The custom error handler can be disabled', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 500)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 500)
+    t.same(JSON.parse(res.payload), {
       error: 'Internal Server Error',
       message: 'kaboom',
       statusCode: 500
@@ -69,8 +69,8 @@ test('The custom error handler should hide the error message for 500s (promise)'
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 500)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 500)
+    t.same(JSON.parse(res.payload), {
       error: 'Internal Server Error',
       message: 'Something went wrong',
       statusCode: 500
@@ -93,8 +93,8 @@ test('Should hide only 500s', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 502)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 502)
+    t.same(JSON.parse(res.payload), {
       error: 'Bad Gateway',
       message: 'kaboom',
       statusCode: 502
@@ -120,8 +120,8 @@ test('Should hide only 500s (promise)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 502)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 502)
+    t.same(JSON.parse(res.payload), {
       error: 'Bad Gateway',
       message: 'kaboom',
       statusCode: 502
@@ -150,8 +150,8 @@ test('Override error handler', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 500)
-    t.deepEqual(JSON.parse(res.payload), {
+    t.equal(res.statusCode, 500)
+    t.same(JSON.parse(res.payload), {
       error: 'Internal Server Error',
       message: 'kaboom',
       statusCode: 500
