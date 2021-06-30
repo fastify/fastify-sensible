@@ -60,6 +60,10 @@ declare module 'fastify' {
     is(types: Array<string>): string | false | null;
     is(...types: Array<string>): string | false | null;
   }
+
+  interface FastifyError {
+    explicitInternalServerError: boolean
+  }
 }
 
 export interface SensibleOptions {
