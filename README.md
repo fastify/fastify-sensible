@@ -116,6 +116,86 @@ fastify.get('/', (req, reply) => {
 })
 ```
 
+#### `reply.cacheControl`
+The `reply` interface is decorated an helper to configure cache control response headers.
+```js
+// configure a single type
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('public')
+  reply.send('ok')
+})
+
+// configure multiple types
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('public')
+  reply.cacheControl('immutable')
+  reply.send('ok')
+})
+
+// configure a type time
+fastify.get('/', (req, reply) => {
+  reply.cacheControl('max-age', 42)
+  reply.send('ok')
+})
+
+// the time can be defined as string
+fastify.get('/', (req, reply) => {
+  // all the formats of github.com/vercel/ms are supported
+  reply.cacheControl('max-age', '1d') // will set to 'max-age=86400'
+  reply.send('ok')
+})
+```
+
+#### `reply.preventCache`
+The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+```js
+fastify.get('/', (req, reply) => {
+  reply.preventCache() // will set to 'no-store, max-age=0, private'
+  reply.send('ok')
+})
+```
+
+#### `reply.revalidate`
+The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+```js
+fastify.get('/', (req, reply) => {
+  reply.revalidate() // will set to 'max-age=0, must-revalidate'
+  reply.send('ok')
+})
+```
+
+#### `reply.staticCache`
+The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+```js
+fastify.get('/', (req, reply) => {
+  // the time can be defined as a string
+  reply.staticCache(42) // will set to 'public, max-age=42, immutable'
+  reply.send('ok')
+})
+```
+
+#### `reply.stale`
+The `reply` interface is decorated an helper to set the cache control header for [stale content](https://tools.ietf.org/html/rfc5861).
+```js
+fastify.get('/', (req, reply) => {
+  // the time can be defined as a string
+  reply.stale('while-revalidate', 42)
+  reply.stale('if-error', 1)
+  reply.send('ok')
+})
+```
+
+#### `reply.maxAge`
+The `reply` interface is decorated an helper to set max age of the response. It can be used in conjunction with `reply.stale`, see [here](https://web.dev/stale-while-revalidate/).
+```js
+fastify.get('/', (req, reply) => {
+  // the time can be defined as a string
+  reply.maxAge(86400)
+  reply.stale('while-revalidate', 42)
+  reply.send('ok')
+})
+```
+
 #### `request.forwarded`
 The `request` interface is decorated with [`jshttp/forwarded`](https://github.com/jshttp/forwarded), the API is the same, but you do not need to pass the request object:
 ```js
@@ -176,4 +256,4 @@ The project name is inspired by [`vim-sensible`](https://github.com/tpope/vim-se
 ## License
 
 MIT
-Copyright © 2018 Tomas Della Vedova
+Copyright © 2018-2021 Tomas Della Vedova

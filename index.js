@@ -8,6 +8,7 @@ const typeis = require('type-is')
 const httpErrors = require('./lib/httpErrors')
 const assert = require('./lib/assert')
 const vary = require('./lib/vary')
+const cache = require('./lib/cache-control')
 
 function fastifySensible (fastify, opts, next) {
   fastify.decorate('httpErrors', httpErrors)
@@ -23,6 +24,12 @@ function fastifySensible (fastify, opts, next) {
   })
 
   fastify.decorateReply('vary', vary)
+  fastify.decorateReply('cacheControl', cache.cacheControl)
+  fastify.decorateReply('preventCache', cache.preventCache)
+  fastify.decorateReply('revalidate', cache.revalidate)
+  fastify.decorateReply('staticCache', cache.staticCache)
+  fastify.decorateReply('stale', cache.stale)
+  fastify.decorateReply('maxAge', cache.maxAge)
 
   // TODO: benchmark if this closure causes some performance drop
   Object.keys(httpErrors).forEach(httpError => {
