@@ -4,7 +4,6 @@
 [![NPM version](https://img.shields.io/npm/v/fastify-sensible.svg?style=flat)](https://www.npmjs.com/package/fastify-sensible)
 [![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-sensible/badge.svg)](https://snyk.io/test/github/fastify/fastify-sensible)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
-[![Coverage Status](https://coveralls.io/repos/github/fastify/fastify-sensible/badge.svg?branch=main)](https://coveralls.io/github/fastify/fastify-sensible?branch=main)
 
 Defaults for Fastify that everyone can agree on™.<br>
 This plugin adds some useful utilities to your Fastify instance, see the API section to learn more.

@@ -23,7 +23,7 @@ test('Should generate the correct http error', t => {
       if (err.message === 'I\'m a teapot') {
         t.equal(err.statusCode, 418)
         // `statusCodes` uses unsupported Unordered Collection
-        // should be deleted after release of https://github.com/jshttp/http-errors/pull/73
+        // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
       } else if (err.message === 'Unordered Collection') {
         t.equal(err.statusCode, 425)
       } else {
@@ -89,7 +89,7 @@ function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
   if (code === '418') return 'imateapot'
   // rename of supported tooEarly to the unsupported unorderedCollection
-  // should be deleted after release of https://github.com/jshttp/http-errors/pull/73
+  // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
   if (code === '425') return 'unorderedCollection'
   if (code === '505') return 'httpVersionNotSupported'
   msg = msg.split(' ').join('').replace(/'/g, '')

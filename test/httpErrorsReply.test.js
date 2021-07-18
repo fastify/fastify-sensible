@@ -36,7 +36,7 @@ test('Should generate the correct http error', t => {
             message: 'I\'m a teapot',
             statusCode: 418
           })
-          // should be deleted after release of https://github.com/jshttp/http-errors/pull/73
+          // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
         } else if (code === '425') {
           t.same(JSON.parse(res.payload), {
             error: node14 ? 'Too Early' : 'Unordered Collection',
@@ -73,7 +73,7 @@ test('Should generate the correct http error using getter', t => {
         url: '/'
       }, (err, res) => {
         t.error(err)
-        // should be deleted after release of https://github.com/jshttp/http-errors/pull/73
+        // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
         if ((node10 && code === '418') || (node14 && code === '425')) {
           t.equal(res.statusCode, 500)
           t.same(JSON.parse(res.payload), {
@@ -129,7 +129,7 @@ function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
   if (code === '418') return 'imateapot'
   // rename of supported tooEarly to the unsupported unorderedCollection
-  // should be deleted after release of https://github.com/jshttp/http-errors/pull/73
+  // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
   if (code === '425') return 'unorderedCollection'
   if (code === '505') return 'httpVersionNotSupported'
   msg = msg.split(' ').join('').replace(/'/g, '')
