@@ -5,26 +5,53 @@ const Fastify = require('fastify')
 const Sensible = require('../index')
 
 test('reply.vary API', t => {
-  t.plan(4)
+  t.plan(2)
 
-  const fastify = Fastify()
-  fastify.register(Sensible)
+  t.test('accept string', t => {
+    t.plan(4)
 
-  fastify.get('/', (req, reply) => {
-    reply.vary('Accept')
-    reply.vary('Origin')
-    reply.vary('User-Agent')
-    reply.send('ok')
+    const fastify = Fastify()
+    fastify.register(Sensible)
+
+    fastify.get('/', (req, reply) => {
+      reply.vary('Accept')
+      reply.vary('Origin')
+      reply.vary('User-Agent')
+      reply.send('ok')
+    })
+
+    fastify.inject({
+      method: 'GET',
+      url: '/'
+    }, (err, res) => {
+      t.error(err)
+      t.equal(res.statusCode, 200)
+      t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
+      t.equal(res.payload, 'ok')
+    })
   })
 
-  fastify.inject({
-    method: 'GET',
-    url: '/'
-  }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
-    t.equal(res.payload, 'ok')
+  t.test('accept array of strings', t => {
+    t.plan(4)
+
+    const fastify = Fastify()
+    fastify.register(Sensible)
+
+    fastify.get('/', (req, reply) => {
+      reply.header('Vary', ['Accept', 'Origin'])
+      reply.vary('User-Agent')
+      reply.send('ok')
+    })
+
+    fastify.inject({
+      method: 'GET',
+      url: '/'
+    }, (err, res) => {
+      t.error(err)
+      t.equal(res.statusCode, 200)
+      t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
+      t.equal(res.payload, 'ok')
+    })
   })
 })
 
