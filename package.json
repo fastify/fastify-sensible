@@ -27,7 +27,7 @@
     "fastify": "^3.0.0",
     "standard": "^16.0.1",
     "tap": "^15.0.2",
-    "tsd": "^0.17.0"
+    "tsd": "^0.18.0"
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.1",
