@@ -7,7 +7,7 @@ declare module 'fastify' {
   }
 
   interface Assert {
-      (condition: unknown, code?: number | string, message?: string): asserts condition;
+    (condition: unknown, code?: number | string, message?: string): asserts condition;
     ok(condition: unknown, code?: number | string, message?: string): asserts condition;
     equal(a: unknown, b: unknown, code?: number | string, message?: string): void;
     notEqual(a: unknown, b: unknown, code?: number | string, message?: string): void;
