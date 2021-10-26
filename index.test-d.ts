@@ -21,7 +21,7 @@ app.get('/', async (req, reply) => {
 })
 
 app.get('/', async (req, reply) => {
-  expectType<string>(app.assert.equal(1, 2))
+  expectType<void>(app.assert.equal(1, 2))
 })
 
 app.get('/', async (req, reply) => {
