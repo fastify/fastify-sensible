@@ -70,7 +70,7 @@ const notFoundErr = fastify.httpErrors.notFound('custom message')
 - <code>fastify.httpErrors.<b>unprocessableEntity()</b></code>
 - <code>fastify.httpErrors.<b>locked()</b></code>
 - <code>fastify.httpErrors.<b>failedDependency()</b></code>
-- <code>fastify.httpErrors.<b>unorderedCollection()</b></code>
+- <code>fastify.httpErrors.<b>tooEarly()</b></code>
 - <code>fastify.httpErrors.<b>upgradeRequired()</b></code>
 - <code>fastify.httpErrors.<b>preconditionRequired()</b></code>
 - <code>fastify.httpErrors.<b>tooManyRequests()</b></code>

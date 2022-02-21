@@ -20,12 +20,8 @@ test('Should generate the correct http error', t => {
       const err = fastify.httpErrors[name]()
       t.ok(err instanceof HttpError)
       // `statusCodes` uses the capital T
-      if (err.message === 'I\'m a teapot') {
+      if (err.message === 'I\'m a Teapot') {
         t.equal(err.statusCode, 418)
-        // `statusCodes` uses unsupported Unordered Collection
-        // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
-      } else if (err.message === 'Unordered Collection') {
-        t.equal(err.statusCode, 425)
       } else {
         t.equal(err.message, statusCodes[code])
       }
@@ -88,9 +84,6 @@ test('Should generate the correct http error (with custom message)', t => {
 function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
   if (code === '418') return 'imateapot'
-  // rename of supported tooEarly to the unsupported unorderedCollection
-  // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
-  if (code === '425') return 'unorderedCollection'
   if (code === '505') return 'httpVersionNotSupported'
   msg = msg.split(' ').join('').replace(/'/g, '')
   msg = msg[0].toLowerCase() + msg.slice(1)
