@@ -33,7 +33,7 @@ type HttpErrorCodes = 400 | '400' // BadRequest
                     | 422 | '422' // UnprocessableEntity
                     | 423 | '423' // Locked
                     | 424 | '424' // FailedDependency
-                    | 425 | '425' // UnorderedCollection
+                    | 425 | '425' // TooEarly
                     | 426 | '426' // UpgradeRequired
                     | 428 | '428' // PreconditionRequired
                     | 429 | '429' // TooManyRequests
@@ -75,7 +75,7 @@ type HttpErrorNames = 'badRequest'
                     | 'unprocessableEntity'
                     | 'locked'
                     | 'failedDependency'
-                    | 'unorderedCollection'
+                    | 'tooEarly'
                     | 'upgradeRequired'
                     | 'preconditionRequired'
                     | 'tooManyRequests'
