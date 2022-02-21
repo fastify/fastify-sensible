@@ -32,8 +32,8 @@ test('Should generate the correct http error', t => {
         if (code === '418') {
           // https://github.com/fastify/fastify/blob/b96934d46091bb1c93f55b07149520bb9e5c0729/lib/reply.js#L350-L355
           t.same(JSON.parse(res.payload), {
-            error: node10 ? 'I\'m a Teapot' : 'I\'m a teapot',
-            message: 'I\'m a teapot',
+            error: 'I\'m a Teapot',
+            message: 'I\'m a Teapot',
             statusCode: 418
           })
           // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73

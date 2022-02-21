@@ -20,7 +20,7 @@ test('Should generate the correct http error', t => {
       const err = fastify.httpErrors[name]()
       t.ok(err instanceof HttpError)
       // `statusCodes` uses the capital T
-      if (err.message === 'I\'m a teapot') {
+      if (err.message === 'I\'m a Teapot') {
         t.equal(err.statusCode, 418)
         // `statusCodes` uses unsupported Unordered Collection
         // TODO should be deleted after release of https://github.com/jshttp/http-errors/pull/73
