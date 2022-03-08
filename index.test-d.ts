@@ -127,3 +127,7 @@ app.get('/', async (req, reply) => {
   expectType<string | false | null>(req.is(['foo', 'bar']))
   expectType<string | false | null>(req.is('foo', 'bar'))
 })
+
+app.get('/', async (req, reply) => {
+  expectAssignable<boolean>(app.httpErrors.internalServerError().explicitInternalServerError)
+})

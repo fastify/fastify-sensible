@@ -5,6 +5,7 @@ interface HttpError extends Error {
   headers?: {
     [key: string]: string;
   };
+  explicitInternalServerError?: boolean
   [key: string]: any;
 }
 

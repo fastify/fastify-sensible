@@ -37,7 +37,7 @@ declare module 'fastify' {
   }
 
   interface FastifyError {
-    explicitInternalServerError: boolean
+    explicitInternalServerError?: boolean
   }
 }
 
