@@ -1,6 +1,6 @@
 {
-  "name": "fastify-sensible",
-  "version": "3.1.2",
+  "name": "@fastify/sensible",
+  "version": "4.0.0",
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
   "scripts": {
@@ -39,5 +39,8 @@
   },
   "engines": {
     "node": ">=10.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
