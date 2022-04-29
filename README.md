@@ -1,7 +1,7 @@
-# fastify-sensible
+# @fastify/sensible
 
 ![CI](https://github.com/fastify/fastify-sensible/workflows/CI/badge.svg)
-[![NPM version](https://img.shields.io/npm/v/fastify-sensible.svg?style=flat)](https://www.npmjs.com/package/fastify-sensible)
+[![NPM version](https://img.shields.io/npm/v/@fastify/sensible.svg?style=flat)](https://www.npmjs.com/package/@fastify/sensible)
 [![Known Vulnerabilities](https://snyk.io/test/github/fastify/fastify-sensible/badge.svg)](https://snyk.io/test/github/fastify/fastify-sensible)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
 
@@ -17,13 +17,13 @@ Because Fastify aims to be as small and focused as possible, every utility that 
 
 ## Install
 ```
-npm i fastify-sensible
+npm i @fastify/sensible
 ```
 
 ## Usage
 ```js
 const fastify = require('fastify')()
-fastify.register(require('fastify-sensible'))
+fastify.register(require('@fastify/sensible'))
 
 fastify.get('/', (req, reply) => {
   reply.notFound()
