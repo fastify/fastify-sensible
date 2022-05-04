@@ -7,14 +7,6 @@ const Fastify = require('fastify')
 const Sensible = require('../index')
 const HttpError = require('../lib/httpErrors').HttpError
 
-// fix unsupported status codes
-const unsupported = [425]
-for (const code in statusCodes) {
-  if (unsupported.includes(Number(code))) {
-    delete statusCodes[code]
-  }
-}
-
 test('Should generate the correct http error', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
@@ -28,13 +20,13 @@ test('Should generate the correct http error', t => {
       const err = fastify.httpErrors[name]()
       t.ok(err instanceof HttpError)
       // `statusCodes` uses the capital T
-      if (err.message === 'I\'m a teapot') {
-        t.is(err.statusCode, 418)
+      if (err.message === 'I\'m a Teapot') {
+        t.equal(err.statusCode, 418)
       } else {
-        t.is(err.message, statusCodes[code])
+        t.equal(err.message, statusCodes[code])
       }
-      t.is(typeof err.name, 'string')
-      t.is(err.statusCode, Number(code))
+      t.equal(typeof err.name, 'string')
+      t.equal(err.statusCode, Number(code))
     })
 
     t.end()
@@ -48,7 +40,7 @@ test('Should expose the createError method from http-errors', t => {
   fastify.ready(err => {
     t.error(err)
 
-    t.is(fastify.httpErrors.createError, createError)
+    t.equal(fastify.httpErrors.createError, createError)
     t.end()
   })
 })
@@ -61,9 +53,9 @@ test('Should generate the correct error using the properties given', t => {
     t.error(err)
     const customError = fastify.httpErrors.createError(404, 'This video does not exist!')
     t.ok(customError instanceof HttpError)
-    t.is(customError.message, 'This video does not exist!')
-    t.is(typeof customError.name, 'string')
-    t.is(customError.statusCode, 404)
+    t.equal(customError.message, 'This video does not exist!')
+    t.equal(typeof customError.name, 'string')
+    t.equal(customError.statusCode, 404)
     t.end()
   })
 })
@@ -80,9 +72,9 @@ test('Should generate the correct http error (with custom message)', t => {
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]('custom')
       t.ok(err instanceof HttpError)
-      t.is(err.message, 'custom')
-      t.is(typeof err.name, 'string')
-      t.is(err.statusCode, Number(code))
+      t.equal(err.message, 'custom')
+      t.equal(typeof err.name, 'string')
+      t.equal(err.statusCode, Number(code))
     })
 
     t.end()
