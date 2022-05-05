@@ -34,11 +34,12 @@
     "fastify-plugin": "^3.0.0",
     "forwarded": "^0.2.0",
     "http-errors": "^2.0.0",
+    "ms": "^2.1.3",
     "type-is": "^1.6.18",
     "vary": "^1.1.2"
   },
   "engines": {
-    "node": ">=10.0.0"
+    "node": ">=14.0.0"
   },
   "publishConfig": {
     "access": "public"

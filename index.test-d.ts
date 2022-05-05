@@ -1,4 +1,4 @@
-import { expectType, expectAssignable } from 'tsd'
+import { expectType, expectAssignable, expectError } from 'tsd'
 import fastify from 'fastify'
 import fastifySensible from '.'
 
@@ -113,6 +113,26 @@ app.get('/', async (req, reply) => {
 
 app.get('/', async (req, reply) => {
   expectType<Promise<[Error, void]>>(app.to<void>(new Promise(resolve => resolve())))
+})
+
+app.get('/', (req, reply) => {
+  expectAssignable<typeof reply>(reply.cacheControl('public'))
+})
+
+app.get('/', (req, reply) => {
+  expectAssignable<typeof reply>(reply.preventCache())
+})
+
+app.get('/', (req, reply) => {
+  expectAssignable<typeof reply>(reply.cacheControl('max-age', 42))
+})
+
+app.get('/', (req, reply) => {
+  expectError(reply.cacheControl('foobar'))
+})
+
+app.get('/', (req, reply) => {
+  expectAssignable<typeof reply>(reply.stale('while-revalidate', 42))
 })
 
 app.get('/', async (req, reply) => {
