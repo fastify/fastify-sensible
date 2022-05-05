@@ -117,6 +117,33 @@ test('reply.stale API (multiple values)', t => {
   })
 })
 
+test('reply.stale API (bad value)', t => {
+  t.plan(5)
+
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.get('/', (req, reply) => {
+    try {
+      reply.stale('foo', 42).send('ok')
+      t.fail('Should throw')
+    } catch (err) {
+      t.ok(err)
+      reply.send('ok')
+    }
+  })
+
+  fastify.inject({
+    method: 'GET',
+    url: '/'
+  }, (err, res) => {
+    t.error(err)
+    t.strictEqual(res.statusCode, 200)
+    t.notOk(res.headers['cache-control'])
+    t.strictEqual(res.payload, 'ok')
+  })
+})
+
 test('reply.revalidate API', t => {
   t.plan(4)
 
@@ -146,6 +173,27 @@ test('reply.staticCache API', t => {
 
   fastify.get('/', (req, reply) => {
     reply.staticCache(42).send('ok')
+  })
+
+  fastify.inject({
+    method: 'GET',
+    url: '/'
+  }, (err, res) => {
+    t.error(err)
+    t.strictEqual(res.statusCode, 200)
+    t.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.strictEqual(res.payload, 'ok')
+  })
+})
+
+test('reply.staticCache API (as string)', t => {
+  t.plan(4)
+
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.get('/', (req, reply) => {
+    reply.staticCache('42s').send('ok')
   })
 
   fastify.inject({
