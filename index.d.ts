@@ -61,7 +61,6 @@ declare module 'fastify' {
 }
 
 export interface SensibleOptions {
-  errorHandler?: boolean
 }
 
 declare const fastifySensible: FastifyPlugin<SensibleOptions>

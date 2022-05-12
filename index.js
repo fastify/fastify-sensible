@@ -49,17 +49,6 @@ function fastifySensible (fastify, opts, next) {
     }
   })
 
-  if (opts.errorHandler !== false) {
-    fastify.setErrorHandler(function (error, request, reply) {
-      if (reply.raw.statusCode === 500 && error.explicitInternalServerError !== true) {
-        request.log.error(error)
-        reply.send(new Error('Something went wrong'))
-      } else {
-        reply.send(error)
-      }
-    })
-  }
-
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
@@ -68,6 +57,6 @@ function fastifySensible (fastify, opts, next) {
 }
 
 module.exports = fp(fastifySensible, {
-  name: 'fastify-sensible',
-  fastify: '>=3.x'
+  name: '@fastify/sensible',
+  fastify: '4.x'
 })
