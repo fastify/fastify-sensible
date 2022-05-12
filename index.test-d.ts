@@ -4,9 +4,7 @@ import fastifySensible from '.'
 
 const app = fastify()
 
-app.register(fastifySensible, {
-  errorHandler: true
-})
+app.register(fastifySensible)
 
 app.get('/', (req, reply) => {
   expectAssignable<void>(reply.badRequest())

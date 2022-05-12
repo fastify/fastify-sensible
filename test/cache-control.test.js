@@ -20,9 +20,9 @@ test('reply.cacheControl API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'public')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'public')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -45,9 +45,9 @@ test('reply.cacheControl API (multiple values)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'public, max-age=604800, immutable')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'public, max-age=604800, immutable')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -66,11 +66,11 @@ test('reply.preventCache API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'no-store, max-age=0, private')
-    t.strictEqual(res.headers.pragma, 'no-cache')
-    t.strictEqual(res.headers.expires, 0)
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'no-store, max-age=0, private')
+    t.equal(res.headers.pragma, 'no-cache')
+    t.equal(res.headers.expires, 0)
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -89,9 +89,9 @@ test('reply.stale API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'stale-while-revalidate=42')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -113,9 +113,9 @@ test('reply.stale API (multiple values)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -140,9 +140,9 @@ test('reply.stale API (bad value)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
+    t.equal(res.statusCode, 200)
     t.notOk(res.headers['cache-control'])
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -161,9 +161,9 @@ test('reply.revalidate API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'max-age=0, must-revalidate')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'max-age=0, must-revalidate')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -182,9 +182,9 @@ test('reply.staticCache API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -203,9 +203,9 @@ test('reply.staticCache API (as string)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -227,9 +227,9 @@ test('reply.maxAge and reply.stale API', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
+    t.equal(res.payload, 'ok')
   })
 })
 
@@ -249,8 +249,8 @@ test('reply.cacheControl API (string time)', t => {
     url: '/'
   }, (err, res) => {
     t.error(err)
-    t.strictEqual(res.statusCode, 200)
-    t.strictEqual(res.headers['cache-control'], 'max-age=86400')
-    t.strictEqual(res.payload, 'ok')
+    t.equal(res.statusCode, 200)
+    t.equal(res.headers['cache-control'], 'max-age=86400')
+    t.equal(res.payload, 'ok')
   })
 })
