@@ -151,7 +151,10 @@ fastify.get('/', (req, reply) => {
 The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
 ```js
 fastify.get('/', (req, reply) => {
-  reply.preventCache() // will set to 'no-store, max-age=0, private'
+  // will set cache-control to 'no-store, max-age=0, private'
+  // and for HTTP/1.0 compatibility
+  // will set pragma to 'no-cache' and expires to 0
+  reply.preventCache()
   reply.send('ok')
 })
 ```

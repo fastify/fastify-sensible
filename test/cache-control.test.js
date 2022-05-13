@@ -52,7 +52,7 @@ test('reply.cacheControl API (multiple values)', t => {
 })
 
 test('reply.preventCache API', t => {
-  t.plan(4)
+  t.plan(6)
 
   const fastify = Fastify()
   fastify.register(Sensible)
@@ -68,6 +68,8 @@ test('reply.preventCache API', t => {
     t.error(err)
     t.equal(res.statusCode, 200)
     t.equal(res.headers['cache-control'], 'no-store, max-age=0, private')
+    t.equal(res.headers.pragma, 'no-cache')
+    t.equal(res.headers.expires, 0)
     t.equal(res.payload, 'ok')
   })
 })
