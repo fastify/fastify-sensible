@@ -26,11 +26,15 @@ const fastify = require('fastify')()
 fastify.register(require('@fastify/sensible'))
 
 fastify.get('/', (req, reply) => {
-  return reply.notFound()
+  reply.notFound()
 })
 
 fastify.get('/async', async (req, reply) => {
   throw fastify.httpErrors.notFound()
+})
+
+fastify.get('/async-return', async (req, reply) => {
+  return reply.notFound()
 })
 
 fastify.listen(3000)
