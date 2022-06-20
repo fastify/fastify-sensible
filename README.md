@@ -26,7 +26,7 @@ const fastify = require('fastify')()
 fastify.register(require('@fastify/sensible'))
 
 fastify.get('/', (req, reply) => {
-  reply.notFound()
+  return reply.notFound()
 })
 
 fastify.get('/async', async (req, reply) => {

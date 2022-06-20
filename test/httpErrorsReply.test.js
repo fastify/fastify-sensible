@@ -9,13 +9,13 @@ test('Should generate the correct http error', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400 || code === '418') return
     t.test(code, t => {
-      t.plan(3)
+      t.plan(4)
       const fastify = Fastify()
       fastify.register(Sensible)
 
       fastify.get('/', (req, reply) => {
         const name = normalize(code, statusCodes[code])
-        reply[name]()
+        t.equal(reply[name](), reply)
       })
 
       fastify.inject({
@@ -47,12 +47,12 @@ test('Should generate the correct http error using getter', t => {
   Object.keys(statusCodes).forEach(code => {
     if (Number(code) < 400 || code === '418') return
     t.test(code, t => {
-      t.plan(3)
+      t.plan(4)
       const fastify = Fastify()
       fastify.register(Sensible)
 
       fastify.get('/', (req, reply) => {
-        reply.getHttpError(code)
+        t.equal(reply.getHttpError(code), reply)
       })
 
       fastify.inject({
