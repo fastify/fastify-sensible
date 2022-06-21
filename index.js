@@ -40,11 +40,13 @@ function fastifySensible (fastify, opts, next) {
       case 'getHttpError':
         fastify.decorateReply('getHttpError', function (errorCode, message) {
           this.send(httpErrors.getHttpError(errorCode, message))
+          return this
         })
         break
       default:
         fastify.decorateReply(httpError, function (message) {
           this.send(httpErrors[httpError](message))
+          return this
         })
     }
   })

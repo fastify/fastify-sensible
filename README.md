@@ -33,6 +33,10 @@ fastify.get('/async', async (req, reply) => {
   throw fastify.httpErrors.notFound()
 })
 
+fastify.get('/async-return', async (req, reply) => {
+  return reply.notFound()
+})
+
 fastify.listen(3000)
 ```
 ## API
