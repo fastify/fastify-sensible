@@ -37,7 +37,7 @@ fastify.get('/async-return', async (req, reply) => {
   return reply.notFound()
 })
 
-fastify.listen(3000)
+fastify.listen({ port: 3000 })
 ```
 ## API
 #### `fastify.httpErrors`
