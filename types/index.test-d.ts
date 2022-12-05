@@ -1,6 +1,6 @@
 import { expectType, expectAssignable, expectError } from 'tsd'
 import fastify from 'fastify'
-import fastifySensible from '.'
+import fastifySensible from '..'
 
 const app = fastify()
 

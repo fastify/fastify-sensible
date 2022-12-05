@@ -62,3 +62,5 @@ module.exports = fp(fastifySensible, {
   name: '@fastify/sensible',
   fastify: '4.x'
 })
+module.exports.default = fastifySensible
+module.exports.fastifySensible = fastifySensible
