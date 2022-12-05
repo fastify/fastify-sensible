@@ -1,5 +1,7 @@
-import { FastifyPlugin  } from 'fastify'
-import { HttpErrors, HttpErrorReplys } from "./lib/httpError"
+import { FastifyPluginCallback  } from 'fastify'
+import { HttpErrors, HttpErrorReplys } from "../lib/httpError"
+
+type FastifySensible = FastifyPluginCallback<fastifySensible.SensibleOptions>
 
 type singleValueTypes = 'must-revalidate' |
   'no-cache' |
@@ -60,8 +62,13 @@ declare module 'fastify' {
   }
 }
 
-export interface SensibleOptions {
+declare namespace fastifySensible {
+  export interface SensibleOptions {
+  }
+
+  export const fastifySensible: FastifySensible
+  export { fastifySensible as default }
 }
 
-declare const fastifySensible: FastifyPlugin<SensibleOptions>
-export default fastifySensible;
+declare function fastifySensible(...params: Parameters<FastifySensible>): ReturnType<FastifySensible>
+export = fastifySensible

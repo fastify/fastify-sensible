@@ -3,8 +3,12 @@
   "version": "5.1.1",
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "standard && tap test/*.test.js && tsd"
+    "lint": "standard",
+    "test": "npm run test:unit && npm run test:typescript",
+    "test:typescript": "tsd",
+    "test:unit": "tap"
   },
   "repository": {
     "type": "git",
