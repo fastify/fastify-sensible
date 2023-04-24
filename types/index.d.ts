@@ -1,5 +1,5 @@
-import { FastifyPluginCallback  } from 'fastify'
-import { HttpErrors, HttpErrorReplys } from "../lib/httpError"
+import { FastifyPluginCallback, FastifyReply  } from 'fastify'
+import { HttpErrors, HttpErrorCodes, HttpErrorNames } from "../lib/httpError"
 
 type FastifySensible = FastifyPluginCallback<fastifySensible.SensibleOptions>
 
@@ -18,6 +18,10 @@ type multiValueTypes = 'max-age' |
   'stale-if-error'
 
 type staleTypes = 'while-revalidate' | 'if-error'
+
+type HttpErrorReplys = {
+  getHttpError: (code: HttpErrorCodes, message?: string) => FastifyReply;
+} & Record<HttpErrorNames, (msg?: string) => FastifyReply>;
 
 declare module 'fastify' {
   namespace SensibleTypes {
