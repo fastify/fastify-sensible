@@ -7,11 +7,6 @@
 Defaults for Fastify that everyone can agree on™.<br>
 This plugin adds some useful utilities to your Fastify instance, see the API section to learn more.
 
-Supports Fastify versions `4.x`.
-Please refer to [this branch](https://github.com/fastify/fastify-sensible/tree/4.x) and related versions for Fastify `3.x` compatibility.
-Please refer to [this branch](https://github.com/fastify/fastify-sensible/tree/2.x) and related versions for Fastify `2.x` compatibility.
-Please refer to [this branch](https://github.com/fastify/fastify-sensible/tree/1.x) and related versions for Fastify `1.x` compatibility.
-
 *Why are these APIs here and not included with Fastify?<br>
 Because Fastify aims to be as small and focused as possible, every utility that is not essential should be shipped as standalone plugin.*
 
@@ -19,6 +14,20 @@ Because Fastify aims to be as small and focused as possible, every utility that 
 ```
 npm i @fastify/sensible
 ```
+
+### Compatibility
+
+| Plugin version | Fastify version |
+| -------------- |---------------- |
+| `^5.0.0`       | `^4.0.0`        |
+| `^4.0.0`       | `^3.0.0`        |
+| `^2.0.0`       | `^2.0.0`        |
+| `^1.0.0`       | `^1.0.0`        |
+
+
+Please note that if a Fastify version is out of support, then so are the corresponding version(s) of this plugin
+in the table above.
+See [Fastify's LTS policy](https://github.com/fastify/fastify/blob/main/docs/Reference/LTS.md) for more details.
 
 ## Usage
 ```js
