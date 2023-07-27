@@ -11,6 +11,7 @@ const vary = require('./lib/vary')
 const cache = require('./lib/cache-control')
 
 function fastifySensible (fastify, opts, next) {
+  console.time()
   fastify.decorate('httpErrors', httpErrors)
   fastify.decorate('assert', assert)
   fastify.decorate('to', to)
@@ -31,8 +32,10 @@ function fastifySensible (fastify, opts, next) {
   fastify.decorateReply('stale', cache.stale)
   fastify.decorateReply('maxAge', cache.maxAge)
 
-  // TODO: benchmark if this closure causes some performance drop
-  Object.keys(httpErrors).forEach(httpError => {
+  const httpErrorsKeys = Object.keys(httpErrors)
+  for (let i = 0; i < httpErrorsKeys.length; ++i) {
+    const httpError = httpErrorsKeys[i]
+
     switch (httpError) {
       case 'HttpError':
         // skip abstract class constructor
@@ -49,12 +52,13 @@ function fastifySensible (fastify, opts, next) {
           return this
         })
     }
-  })
+  }
 
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
 
+  console.timeEnd()
   next()
 }
 
