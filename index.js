@@ -11,7 +11,6 @@ const vary = require('./lib/vary')
 const cache = require('./lib/cache-control')
 
 function fastifySensible (fastify, opts, next) {
-  console.time()
   fastify.decorate('httpErrors', httpErrors)
   fastify.decorate('assert', assert)
   fastify.decorate('to', to)
@@ -58,7 +57,6 @@ function fastifySensible (fastify, opts, next) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
 
-  console.timeEnd()
   next()
 }
 
