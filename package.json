@@ -6,6 +6,7 @@
   "types": "types/index.d.ts",
   "scripts": {
     "lint": "standard",
+    "lint:fix": "standard --fix",
     "test": "npm run test:unit && npm run test:typescript",
     "test:typescript": "tsd",
     "test:unit": "tap"
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
+    "@fastify/pre-commit": "^2.0.2",
     "@types/node": "^20.1.0",
     "fastify": "^4.0.0-rc.2",
     "standard": "^17.0.0",
