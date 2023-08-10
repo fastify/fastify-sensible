@@ -181,7 +181,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.staticCache`
-The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+The `reply` interface is decorated with a helper to set the cache control header to a public and immutable configuration.
 ```js
 fastify.get('/', (req, reply) => {
   // the time can be defined as a string
