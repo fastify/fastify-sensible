@@ -8,7 +8,7 @@ Defaults for Fastify that everyone can agree on™.<br>
 This plugin adds some useful utilities to your Fastify instance, see the API section to learn more.
 
 *Why are these APIs here and not included with Fastify?<br>
-Because Fastify aims to be as small and focused as possible, every utility that is not essential should be shipped as standalone plugin.*
+Because Fastify aims to be as small and focused as possible, every utility that is not essential should be shipped as a standalone plugin.*
 
 ## Install
 ```
@@ -50,9 +50,9 @@ fastify.listen({ port: 3000 })
 ```
 ## API
 #### `fastify.httpErrors`
-Object that exposes `createError` and all the `4xx` and `5xx` error constructors.
+Object that exposes `createError` and all of the `4xx` and `5xx` error constructors.
 
-Usage of `4xx` and `5xx` error constructors follows the same structure as [`new createError[code || name]([msg]))`](https://github.com/jshttp/http-errors#new-createerrorcode--namemsg) in [http-errors](https://github.com/jshttp/http-errors):
+Use of `4xx` and `5xx` error constructors follows the same structure as [`new createError[code || name]([msg]))`](https://github.com/jshttp/http-errors#new-createerrorcode--namemsg) in [http-errors](https://github.com/jshttp/http-errors):
 
 ```js
  // the custom message is optional
@@ -106,14 +106,14 @@ const notFoundErr = fastify.httpErrors.notFound('custom message')
 
 `createError`
 
-Usage of `createError` follows the same structure as [`createError([status], [message], [properties])`](https://github.com/jshttp/http-errors#createerrorstatus-message-properties) in [http-errors](https://github.com/jshttp/http-errors):
+Use of `createError` follows the same structure as [`createError([status], [message], [properties])`](https://github.com/jshttp/http-errors#createerrorstatus-message-properties) in [http-errors](https://github.com/jshttp/http-errors):
 
 ```js
 var err = fastify.httpErrors.createError(404, 'This video does not exist!')
 ```
 
 #### `reply.[httpError]`
-The `reply` interface is decorated with all the functions declared above, using it is very easy:
+The `reply` interface is decorated with all of the functions declared above, using it is easy:
 ```js
 fastify.get('/', (req, reply) => {
   reply.notFound()
@@ -160,7 +160,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.preventCache`
-The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+The `reply` interface is decorated with a helper to set the cache control header to a no caching configuration.
 ```js
 fastify.get('/', (req, reply) => {
   // will set cache-control to 'no-store, max-age=0, private'
@@ -172,7 +172,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.revalidate`
-The `reply` interface is decorated an helper to set the cache control header to a no caching configuration.
+The `reply` interface is decorated with a helper to set the cache control header to a no caching configuration.
 ```js
 fastify.get('/', (req, reply) => {
   reply.revalidate() // will set to 'max-age=0, must-revalidate'
@@ -191,7 +191,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.stale`
-The `reply` interface is decorated an helper to set the cache control header for [stale content](https://tools.ietf.org/html/rfc5861).
+The `reply` interface is decorated with a helper to set the cache control header for [stale content](https://tools.ietf.org/html/rfc5861).
 ```js
 fastify.get('/', (req, reply) => {
   // the time can be defined as a string
@@ -202,7 +202,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.maxAge`
-The `reply` interface is decorated an helper to set max age of the response. It can be used in conjunction with `reply.stale`, see [here](https://web.dev/stale-while-revalidate/).
+The `reply` interface is decorated with a helper to set max age of the response. It can be used in conjunction with `reply.stale`, see [here](https://web.dev/stale-while-revalidate/).
 ```js
 fastify.get('/', (req, reply) => {
   // the time can be defined as a string
@@ -229,14 +229,14 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `assert`
-Verify if a given condition is true, if not it throws the specified http error.<br> Very useful if you work with *async* routes:
+Verify if a given condition is true, if not it throws the specified http error.<br> Useful if you work with *async* routes:
 ```js
 // the custom message is optional
 fastify.assert(
   req.headers.authorization, 400, 'Missing authorization header'
 )
 ```
-The `assert` API exposes also the following methods:
+The `assert` API also exposes the following methods:
 - <code>fastify.assert.<b>ok()</b></code>
 - <code>fastify.assert.<b>equal()</b></code>
 - <code>fastify.assert.<b>notEqual()</b></code>
