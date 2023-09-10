@@ -2,7 +2,7 @@
 
 const { test } = require('tap')
 const createError = require('http-errors')
-const statusCodes = require('http').STATUS_CODES
+const statusCodes = require('node:http').STATUS_CODES
 const Fastify = require('fastify')
 const Sensible = require('../index')
 const HttpError = require('../lib/httpErrors').HttpError
