@@ -53,6 +53,19 @@ function fastifySensible (fastify, opts, next) {
     }
   }
 
+  if (opts?.sharedSchemaId) {
+    fastify.addSchema({
+      $id: opts.sharedSchemaId,
+      type: 'object',
+      properties: {
+        statusCode: { type: 'number' },
+        code: { type: 'string' },
+        error: { type: 'string' },
+        message: { type: 'string' }
+      }
+    })
+  }
+
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
