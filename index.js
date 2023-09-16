@@ -53,6 +53,21 @@ function fastifySensible (fastify, opts, next) {
     }
   }
 
+  if (opts?.sharedSchemaId) {
+    // The schema must be the same as:
+    // https://github.com/fastify/fastify/blob/c08b67e0bfedc9935b51c787ae4cd6b250ad303c/build/build-error-serializer.js#L8-L16
+    fastify.addSchema({
+      $id: opts.sharedSchemaId,
+      type: 'object',
+      properties: {
+        statusCode: { type: 'number' },
+        code: { type: 'string' },
+        error: { type: 'string' },
+        message: { type: 'string' }
+      }
+    })
+  }
+
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }

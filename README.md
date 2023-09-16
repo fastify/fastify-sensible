@@ -48,6 +48,29 @@ fastify.get('/async-return', async (req, reply) => {
 
 fastify.listen({ port: 3000 })
 ```
+
+## Shared JSON Schema for HTTP errors
+If you set the `sharedSchemaId` option, a shared JSON Schema is added and can be used in your routes.
+```js
+const fastify = require('fastify')()
+fastify.register(require('@fastify/sensible'), {
+  sharedSchemaId: 'httpError'
+})
+
+fastify.get('/async', {
+  schema: {
+    response: {
+      404: { $ref: 'httpError' }
+    }
+  }
+  handler: async (req, reply) => {
+    return reply.notFound()
+  }
+})
+
+fastify.listen({ port: 3000 })
+```
+
 ## API
 #### `fastify.httpErrors`
 Object that exposes `createError` and all of the `4xx` and `5xx` error constructors.
