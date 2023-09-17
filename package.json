@@ -1,6 +1,6 @@
 {
   "name": "@fastify/sensible",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
   "types": "types/index.d.ts",
