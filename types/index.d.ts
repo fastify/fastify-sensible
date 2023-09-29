@@ -68,6 +68,7 @@ declare module 'fastify' {
 
 declare namespace fastifySensible {
   export interface SensibleOptions {
+    sharedSchemaId?: string;
   }
 
   export const fastifySensible: FastifySensible
