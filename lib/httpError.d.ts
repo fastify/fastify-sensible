@@ -10,7 +10,7 @@ interface HttpError extends Error {
 
 type UnknownError = Error | string | number | { [key: string]: any };
 
-type HttpErrorCodes = 400 | '400' // BadRequest
+export type HttpErrorCodes = 400 | '400' // BadRequest
                     | 401 | '401' // Unauthorized
                     | 402 | '402' // PaymentRequired
                     | 403 | '403' // Forbidden
@@ -52,7 +52,7 @@ type HttpErrorCodes = 400 | '400' // BadRequest
                     | 510 | '510' // NotExtended
                     | 511 | '511' // NetworkAuthenticationRequire
 
-type HttpErrorNames = 'badRequest'
+export type HttpErrorNames = 'badRequest'
                     | 'unauthorized'
                     | 'paymentRequired'
                     | 'forbidden'
