@@ -1,10 +1,14 @@
-import { expectType, expectAssignable, expectError } from 'tsd'
+import { expectType, expectAssignable, expectError, expectNotAssignable } from 'tsd'
 import fastify from 'fastify'
-import fastifySensible from '..'
+import fastifySensible, { SensibleOptions } from '..'
 
 const app = fastify()
 
 app.register(fastifySensible)
+
+expectAssignable<SensibleOptions>({});
+expectAssignable<SensibleOptions>({ sharedSchemaId: 'HttpError' });
+expectNotAssignable<SensibleOptions>({ notSharedSchemaId: 'HttpError' });
 
 app.get('/', (req, reply) => {
   expectAssignable<typeof reply>(reply.badRequest())

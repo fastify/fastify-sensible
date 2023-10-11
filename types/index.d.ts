@@ -68,6 +68,26 @@ declare module 'fastify' {
 
 declare namespace fastifySensible {
   export interface SensibleOptions {
+    /**
+     * You can use this option to register a shared JSON Schema you can use in your routes.
+     * 
+     * @example
+     * ```js
+     * fastify.register(require('@fastify/sensible'), {
+     *   sharedSchemaId: 'httpError'
+     * })
+     *
+     * fastify.get('/async', {
+     *   schema: {
+     *     response: { 404: { $ref: 'httpError' } }
+     *   }
+     *   handler: async (req, reply) => {
+     *     return reply.notFound()
+     *   }
+     * })
+     * ```
+     */
+    sharedSchemaId?: string;
   }
 
   export const fastifySensible: FastifySensible
