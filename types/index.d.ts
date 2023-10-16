@@ -68,7 +68,7 @@ declare module 'fastify' {
 declare namespace fastifySensible {
   export interface SensibleOptions {
     /**
-     * You can use this option to register a shared JSON Schema you can use in your routes.
+     * This option registers a shared JSON Schema to be used by all response schemas.
      * 
      * @example
      * ```js
