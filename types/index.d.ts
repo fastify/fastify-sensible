@@ -73,12 +73,12 @@ declare namespace fastifySensible {
      * @example
      * ```js
      * fastify.register(require('@fastify/sensible'), {
-     *   sharedSchemaId: 'httpError'
+     *   sharedSchemaId: 'HttpError'
      * })
      *
      * fastify.get('/async', {
      *   schema: {
-     *     response: { 404: { $ref: 'httpError' } }
+     *     response: { 404: { $ref: 'HttpError' } }
      *   }
      *   handler: async (req, reply) => {
      *     return reply.notFound()

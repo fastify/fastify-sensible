@@ -54,13 +54,13 @@ If you set the `sharedSchemaId` option, a shared JSON Schema is added and can be
 ```js
 const fastify = require('fastify')()
 fastify.register(require('@fastify/sensible'), {
-  sharedSchemaId: 'httpError'
+  sharedSchemaId: 'HttpError'
 })
 
 fastify.get('/async', {
   schema: {
     response: {
-      404: { $ref: 'httpError' }
+      404: { $ref: 'HttpError' }
     }
   }
   handler: async (req, reply) => {
