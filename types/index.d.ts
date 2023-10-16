@@ -93,7 +93,6 @@ declare namespace fastifySensible {
   export type HttpErrorCodes = Errors.HttpErrorCodes;
   export type HttpErrorNames = Errors.HttpErrorNames;
 
-
   export type HttpErrorReplys = {
     getHttpError: (code: HttpErrorCodes, message?: string) => FastifyReply;
   } & Record<HttpErrorNames, (msg?: string) => FastifyReply>
