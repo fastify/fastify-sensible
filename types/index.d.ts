@@ -1,27 +1,26 @@
 import { FastifyPluginCallback, FastifyReply  } from 'fastify'
 import { HttpErrors, HttpErrorCodes, HttpErrorNames } from "../lib/httpError"
+import * as Errors from '../lib/httpError'
 
 type FastifySensible = FastifyPluginCallback<fastifySensible.SensibleOptions>
 
-type singleValueTypes = 'must-revalidate' |
-  'no-cache' |
-  'no-store' |
-  'no-transform' |
-  'public' |
-  'private' |
-  'proxy-revalidate' |
-  'immutable'
+type singleValueTypes =
+  | 'must-revalidate'
+  | 'no-cache'
+  | 'no-store'
+  | 'no-transform'
+  | 'public'
+  | 'private'
+  | 'proxy-revalidate'
+  | 'immutable'
 
-type multiValueTypes = 'max-age' |
-  's-maxage' |
-  'stale-while-revalidate' |
-  'stale-if-error'
+type multiValueTypes =
+  | 'max-age'
+  | 's-maxage'
+  | 'stale-while-revalidate'
+  | 'stale-if-error'
 
 type staleTypes = 'while-revalidate' | 'if-error'
-
-type HttpErrorReplys = {
-  getHttpError: (code: HttpErrorCodes, message?: string) => FastifyReply;
-} & Record<HttpErrorNames, (msg?: string) => FastifyReply>;
 
 declare module 'fastify' {
   namespace SensibleTypes {
@@ -45,7 +44,7 @@ declare module 'fastify' {
     httpErrors: HttpErrors;
   }
 
-  interface FastifyReply extends HttpErrorReplys {
+  interface FastifyReply extends fastifySensible.HttpErrorReplys {
     vary: {
       (field: string | string[]): void;
       append: (header: string, field: string | string[]) => string;
@@ -68,7 +67,35 @@ declare module 'fastify' {
 
 declare namespace fastifySensible {
   export interface SensibleOptions {
+    /**
+     * This option registers a shared JSON Schema to be used by all response schemas.
+     * 
+     * @example
+     * ```js
+     * fastify.register(require('@fastify/sensible'), {
+     *   sharedSchemaId: 'HttpError'
+     * })
+     *
+     * fastify.get('/async', {
+     *   schema: {
+     *     response: { 404: { $ref: 'HttpError' } }
+     *   }
+     *   handler: async (req, reply) => {
+     *     return reply.notFound()
+     *   }
+     * })
+     * ```
+     */
+    sharedSchemaId?: string;
   }
+
+  export type HttpErrors = Errors.HttpErrors;
+  export type HttpErrorCodes = Errors.HttpErrorCodes;
+  export type HttpErrorNames = Errors.HttpErrorNames;
+
+  export type HttpErrorReplys = {
+    getHttpError: (code: HttpErrorCodes, message?: string) => FastifyReply;
+  } & Record<HttpErrorNames, (msg?: string) => FastifyReply>
 
   export const fastifySensible: FastifySensible
   export { fastifySensible as default }
