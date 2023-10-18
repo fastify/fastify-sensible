@@ -81,6 +81,12 @@ test('Should generate the correct http error (with custom message)', t => {
   })
 })
 
+test('should throw error', (t) => {
+  const err = Sensible.httpErrors.conflict('custom')
+  t.equal(err.message, 'custom')
+  t.end()
+})
+
 function normalize (code, msg) {
   if (code === '414') return 'uriTooLong'
   if (code === '418') return 'imateapot'
