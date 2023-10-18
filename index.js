@@ -81,3 +81,4 @@ module.exports = fp(fastifySensible, {
 })
 module.exports.default = fastifySensible
 module.exports.fastifySensible = fastifySensible
+module.exports.httpErrors = httpErrors

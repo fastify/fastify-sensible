@@ -99,3 +99,6 @@ export type HttpErrors = {
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
   createError: (...args: UnknownError[]) => HttpError;
 } & Record<HttpErrorNames, (msg?: string) => HttpError>;
+
+declare const HttpErrors: HttpErrors 
+export default HttpErrors;

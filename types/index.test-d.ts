@@ -1,6 +1,6 @@
 import { expectType, expectAssignable, expectError, expectNotAssignable } from 'tsd'
 import fastify from 'fastify'
-import fastifySensible, { SensibleOptions } from '..'
+import fastifySensible, { SensibleOptions, httpErrors } from '..'
 
 const app = fastify()
 
@@ -149,3 +149,6 @@ app.get('/', async (req, reply) => {
   expectType<string | false | null>(req.is(['foo', 'bar']))
   expectType<string | false | null>(req.is('foo', 'bar'))
 })
+
+httpErrors.forbidden('This type should be also available');
+httpErrors.createError('MyError');
