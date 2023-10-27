@@ -3,6 +3,7 @@
   "version": "5.5.0",
   "description": "Defaults for Fastify that everyone can agree on",
   "main": "index.js",
+  "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
     "lint": "standard",
