@@ -62,7 +62,7 @@ fastify.get('/async', {
     response: {
       404: { $ref: 'HttpError' }
     }
-  }
+  },
   handler: async (req, reply) => {
     return reply.notFound()
   }
