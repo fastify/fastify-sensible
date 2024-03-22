@@ -29,17 +29,17 @@
   },
   "homepage": "https://github.com/fastify/fastify-sensible#readme",
   "devDependencies": {
-    "@fastify/pre-commit": "^2.0.2",
-    "@types/node": "^20.1.0",
+    "@fastify/pre-commit": "^2.1.0",
+    "@types/node": "^20.11.30",
     "fastify": "^4.0.0-rc.2",
-    "standard": "^17.0.0",
-    "tap": "^16.0.0",
+    "standard": "^17.1.0",
+    "tap": "^18.7.1",
     "tsd": "^0.31.0"
   },
   "dependencies": {
-    "@lukeed/ms": "^2.0.1",
+    "@lukeed/ms": "^2.0.2",
     "dequal": "^2.0.3",
-    "fastify-plugin": "^4.0.0",
+    "fastify-plugin": "^4.5.1",
     "forwarded": "^0.2.0",
     "http-errors": "^2.0.0",
     "type-is": "^1.6.18",
