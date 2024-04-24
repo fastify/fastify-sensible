@@ -1,6 +1,6 @@
 import { expectType, expectAssignable, expectError, expectNotAssignable } from 'tsd'
 import fastify from 'fastify'
-import fastifySensible, { SensibleOptions, httpErrors } from '..'
+import fastifySensible, { SensibleOptions, httpErrors, HttpError } from '..'
 
 const app = fastify()
 
@@ -59,6 +59,14 @@ app.get('/', (req, reply) => {
 app.get('/', (req, reply) => {
   expectAssignable<Error>(app.httpErrors.createError(405, 'Method Not Allowed'))
 })
+
+app.get("/", (req, reply) => {
+  expectAssignable<HttpError>(
+    app.httpErrors.createError(405, "Method Not Allowed"),
+  );
+  expectAssignable<HttpError>(app.httpErrors.badRequest());
+});
+
 
 app.get('/', async (req, reply) => {
   expectAssignable<Error>(app.httpErrors.badRequest())

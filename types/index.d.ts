@@ -89,6 +89,7 @@ declare namespace fastifySensible {
     sharedSchemaId?: string;
   }
 
+  export type HttpError = Errors.HttpError;
   export type HttpErrors = Errors.HttpErrors;
   export type HttpErrorCodes = Errors.HttpErrorCodes;
   export type HttpErrorNames = Errors.HttpErrorNames;
