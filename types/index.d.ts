@@ -2,7 +2,7 @@ import { FastifyPluginCallback, FastifyReply  } from 'fastify'
 import { HttpErrors } from "../lib/httpError"
 import * as Errors from '../lib/httpError'
 
-type FastifySensible = FastifyPluginCallback<fastifySensible.SensibleOptions>
+type FastifySensible = FastifyPluginCallback<fastifySensible.FastifySensibleOptions>
 
 type singleValueTypes =
   | 'must-revalidate'
@@ -66,7 +66,7 @@ declare module 'fastify' {
 }
 
 declare namespace fastifySensible {
-  export interface SensibleOptions {
+  export interface FastifySensibleOptions {
     /**
      * This option registers a shared JSON Schema to be used by all response schemas.
      * 
@@ -88,6 +88,11 @@ declare namespace fastifySensible {
      */
     sharedSchemaId?: string;
   }
+
+  /**
+   * @deprecated Use FastifySensibleOptions instead
+   */
+  export interface SensibleOptions extends FastifySensibleOptions {}
 
   export type HttpError = Errors.HttpError;
   export type HttpErrors = Errors.HttpErrors;
