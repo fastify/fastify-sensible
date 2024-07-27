@@ -89,11 +89,6 @@ declare namespace fastifySensible {
     sharedSchemaId?: string;
   }
 
-  /**
-   * @deprecated Use FastifySensibleOptions instead
-   */
-  export interface SensibleOptions extends FastifySensibleOptions {}
-
   export type HttpError = Errors.HttpError;
   export type HttpErrors = Errors.HttpErrors;
   export type HttpErrorCodes = Errors.HttpErrorCodes;
