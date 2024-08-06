@@ -77,7 +77,7 @@ function fastifySensible (fastify, opts, next) {
 
 module.exports = fp(fastifySensible, {
   name: '@fastify/sensible',
-  fastify: '4.x'
+  fastify: '5.x'
 })
 module.exports.default = fastifySensible
 module.exports.fastifySensible = fastifySensible
