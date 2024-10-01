@@ -39,7 +39,7 @@
   "dependencies": {
     "@lukeed/ms": "^2.0.2",
     "dequal": "^2.0.3",
-    "fastify-plugin": "^5.0.0-pre.fv5.1",
+    "fastify-plugin": "^5.0.0",
     "forwarded": "^0.2.0",
     "http-errors": "^2.0.0",
     "type-is": "^1.6.18",
