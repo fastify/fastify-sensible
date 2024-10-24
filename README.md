@@ -133,7 +133,7 @@ const notFoundErr = fastify.httpErrors.notFound('custom message')
 Use of `createError` follows the same structure as [`createError([status], [message], [properties])`](https://github.com/jshttp/http-errors#createerrorstatus-message-properties) in [http-errors](https://github.com/jshttp/http-errors):
 
 ```js
-var err = fastify.httpErrors.createError(404, 'This video does not exist!')
+const err = fastify.httpErrors.createError(404, 'This video does not exist!')
 ```
 
 #### `reply.[httpError]`
