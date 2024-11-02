@@ -18,12 +18,12 @@ npm i @fastify/sensible
 ### Compatibility
 
 | Plugin version | Fastify version |
-| -------------- |---------------- |
-| `^6.0.0`       | `^5.0.0`        |
-| `^5.0.0`       | `^4.0.0`        |
-| `^4.0.0`       | `^3.0.0`        |
-| `^2.0.0`       | `^2.0.0`        |
-| `^1.0.0`       | `^1.0.0`        |
+| -------------- | --------------- |
+| `^6.x`         | `^5.x`          |
+| `^5.x`         | `^4.x`          |
+| `^4.x`         | `^3.x`          |
+| `^2.x`         | `^2.x`          |
+| `^1.x`         | `^1.x`          |
 
 
 Please note that if a Fastify version is out of support, then so are the corresponding version(s) of this plugin
