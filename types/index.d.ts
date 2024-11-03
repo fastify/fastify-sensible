@@ -69,7 +69,7 @@ declare namespace fastifySensible {
   export interface FastifySensibleOptions {
     /**
      * This option registers a shared JSON Schema to be used by all response schemas.
-     * 
+     *
      * @example
      * ```js
      * fastify.register(require('@fastify/sensible'), {
