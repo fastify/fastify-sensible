@@ -8,6 +8,10 @@ export interface HttpError extends Error {
   [key: string]: any;
 }
 
+export declare class HttpError {
+  constructor(msg?: string)
+}
+
 type UnknownError = Error | string | number | { [key: string]: any };
 
 export type HttpErrorCodes = 400 | '400' // BadRequest
@@ -95,7 +99,7 @@ export type HttpErrorNames = 'badRequest'
                     | 'networkAuthenticationRequired';
 
 export type HttpErrors = {
-  HttpError: HttpError;
+  HttpError: typeof HttpError;
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
   createError: (...args: UnknownError[]) => HttpError;
 } & Record<HttpErrorNames, (msg?: string) => HttpError>;
