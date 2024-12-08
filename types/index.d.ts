@@ -24,7 +24,7 @@ type staleTypes = 'while-revalidate' | 'if-error'
 
 declare module 'fastify' {
   namespace SensibleTypes {
-    type ToType<T> = [Error, T];
+    type ToType<T> = [Error, T]
   }
 
   interface Assert {
@@ -105,5 +105,5 @@ declare namespace fastifySensible {
   export { fastifySensible as default }
 }
 
-declare function fastifySensible(...params: Parameters<FastifySensible>): ReturnType<FastifySensible>
+declare function fastifySensible (...params: Parameters<FastifySensible>): ReturnType<FastifySensible>
 export = fastifySensible

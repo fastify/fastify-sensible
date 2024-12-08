@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/fastify/fastify-sensible/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/fastify/fastify-sensible/actions/workflows/ci.yml)
 [![NPM version](https://img.shields.io/npm/v/@fastify/sensible.svg?style=flat)](https://www.npmjs.com/package/@fastify/sensible)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://standardjs.com/)
+[![neostandard javascript style](https://img.shields.io/badge/code_style-neostandard-brightgreen?style=flat)](https://github.com/neostandard/neostandard)
 
 Defaults for Fastify that everyone can agree on™.<br>
 This plugin adds some useful utilities to your Fastify instance, see the API section to learn more.

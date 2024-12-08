@@ -8,7 +8,7 @@ export declare class HttpError<N extends number = number> extends Error {
   [key: string]: any;
 }
 
-type UnknownError = Error | string | number | { [key: string]: any };
+type UnknownError = Error | string | number | { [key: string]: any }
 
 export type HttpErrorCodes = 400 | '400' // BadRequest
                     | 401 | '401' // Unauthorized
@@ -92,13 +92,13 @@ export type HttpErrorNames = 'badRequest'
                     | 'loopDetected'
                     | 'bandwidthLimitExceeded'
                     | 'notExtended'
-                    | 'networkAuthenticationRequired';
+                    | 'networkAuthenticationRequired'
 
 export type HttpErrors = {
   HttpError: typeof HttpError;
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
   createError: (...args: UnknownError[]) => HttpError;
-} & Record<HttpErrorNames, (msg?: string) => HttpError>;
+} & Record<HttpErrorNames, (msg?: string) => HttpError>
 
 declare const HttpErrors: HttpErrors
-export default HttpErrors;
+export default HttpErrors
