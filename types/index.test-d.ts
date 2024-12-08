@@ -6,9 +6,9 @@ const app = fastify()
 
 app.register(fastifySensible)
 
-expectAssignable<FastifySensibleOptions>({});
-expectAssignable<FastifySensibleOptions>({ sharedSchemaId: 'HttpError' });
-expectNotAssignable<FastifySensibleOptions>({ notSharedSchemaId: 'HttpError' });
+expectAssignable<FastifySensibleOptions>({})
+expectAssignable<FastifySensibleOptions>({ sharedSchemaId: 'HttpError' })
+expectNotAssignable<FastifySensibleOptions>({ notSharedSchemaId: 'HttpError' })
 
 app.get('/', (req, reply) => {
   expectAssignable<typeof reply>(reply.badRequest())
@@ -60,13 +60,12 @@ app.get('/', (req, reply) => {
   expectAssignable<Error>(app.httpErrors.createError(405, 'Method Not Allowed'))
 })
 
-app.get("/", (req, reply) => {
+app.get('/', (req, reply) => {
   expectAssignable<HttpError>(
-    app.httpErrors.createError(405, "Method Not Allowed"),
-  );
-  expectAssignable<HttpError>(app.httpErrors.badRequest());
-});
-
+    app.httpErrors.createError(405, 'Method Not Allowed')
+  )
+  expectAssignable<HttpError>(app.httpErrors.badRequest())
+})
 
 app.get('/', async (req, reply) => {
   expectAssignable<Error>(app.httpErrors.badRequest())
@@ -158,5 +157,5 @@ app.get('/', async (req, reply) => {
   expectType<string | false | null>(req.is('foo', 'bar'))
 })
 
-httpErrors.forbidden('This type should be also available');
-httpErrors.createError('MyError');
+httpErrors.forbidden('This type should be also available')
+httpErrors.createError('MyError')

@@ -1,5 +1,5 @@
-import { FastifyPluginCallback, FastifyReply  } from 'fastify'
-import { HttpErrors } from "../lib/httpError"
+import { FastifyPluginCallback, FastifyReply } from 'fastify'
+import { HttpErrors } from '../lib/httpError'
 import * as Errors from '../lib/httpError'
 
 type FastifySensible = FastifyPluginCallback<fastifySensible.FastifySensibleOptions>
@@ -24,7 +24,7 @@ type staleTypes = 'while-revalidate' | 'if-error'
 
 declare module 'fastify' {
   namespace SensibleTypes {
-    type ToType<T> = [Error, T];
+    type ToType<T> = [Error, T]
   }
 
   interface Assert {
@@ -89,10 +89,10 @@ declare namespace fastifySensible {
     sharedSchemaId?: string;
   }
 
-  export type HttpError = Errors.HttpError;
-  export type HttpErrors = Errors.HttpErrors;
-  export type HttpErrorCodes = Errors.HttpErrorCodes;
-  export type HttpErrorNames = Errors.HttpErrorNames;
+  export type HttpError = Errors.HttpError
+  export type HttpErrors = Errors.HttpErrors
+  export type HttpErrorCodes = Errors.HttpErrorCodes
+  export type HttpErrorNames = Errors.HttpErrorNames
 
   export const httpErrors: typeof Errors.default
 
@@ -104,5 +104,5 @@ declare namespace fastifySensible {
   export { fastifySensible as default }
 }
 
-declare function fastifySensible(...params: Parameters<FastifySensible>): ReturnType<FastifySensible>
+declare function fastifySensible (...params: Parameters<FastifySensible>): ReturnType<FastifySensible>
 export = fastifySensible
