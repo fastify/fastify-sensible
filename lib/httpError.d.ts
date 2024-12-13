@@ -1,6 +1,6 @@
-export interface HttpError extends Error {
-  status: number;
-  statusCode: number;
+export declare class HttpError<N extends number = number> extends Error {
+  status: N;
+  statusCode: N;
   expose: boolean;
   headers?: {
     [key: string]: string;
@@ -95,7 +95,7 @@ export type HttpErrorNames = 'badRequest'
                     | 'networkAuthenticationRequired';
 
 export type HttpErrors = {
-  HttpError: HttpError;
+  HttpError: typeof HttpError;
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
   createError: (...args: UnknownError[]) => HttpError;
 } & Record<HttpErrorNames, (msg?: string) => HttpError>;
