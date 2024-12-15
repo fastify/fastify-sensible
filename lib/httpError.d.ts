@@ -1,10 +1,11 @@
 export declare class HttpError<N extends number = number> extends Error {
-  status: N;
-  statusCode: N;
-  expose: boolean;
+  status: N
+  statusCode: N
+  expose: boolean
   headers?: {
     [key: string]: string;
   };
+
   [key: string]: any;
 }
 

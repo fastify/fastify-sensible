@@ -1,5 +1,5 @@
-import { FastifyPluginCallback, FastifyReply  } from 'fastify'
-import { HttpErrors, HttpError } from "../lib/httpError"
+import { FastifyPluginCallback, FastifyReply } from 'fastify'
+import { HttpErrors, HttpError } from '../lib/httpError'
 import * as Errors from '../lib/httpError'
 
 type FastifySensible = FastifyPluginCallback<fastifySensible.FastifySensibleOptions>
@@ -89,11 +89,11 @@ declare namespace fastifySensible {
     sharedSchemaId?: string;
   }
 
-  export { HttpError };
+  export { HttpError }
 
-  export type HttpErrors = Errors.HttpErrors;
-  export type HttpErrorCodes = Errors.HttpErrorCodes;
-  export type HttpErrorNames = Errors.HttpErrorNames;
+  export type HttpErrors = Errors.HttpErrors
+  export type HttpErrorCodes = Errors.HttpErrorCodes
+  export type HttpErrorNames = Errors.HttpErrorNames
 
   export const httpErrors: typeof Errors.default
 
