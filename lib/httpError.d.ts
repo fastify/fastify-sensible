@@ -1,14 +1,15 @@
 export declare class HttpError<N extends number = number> extends Error {
-  status: N;
-  statusCode: N;
-  expose: boolean;
+  status: N
+  statusCode: N
+  expose: boolean
   headers?: {
     [key: string]: string;
   };
+
   [key: string]: any;
 }
 
-type UnknownError = Error | string | number | { [key: string]: any };
+type UnknownError = Error | string | number | { [key: string]: any }
 
 export type HttpErrorCodes = 400 | '400' // BadRequest
                     | 401 | '401' // Unauthorized
@@ -92,13 +93,14 @@ export type HttpErrorNames = 'badRequest'
                     | 'loopDetected'
                     | 'bandwidthLimitExceeded'
                     | 'notExtended'
-                    | 'networkAuthenticationRequired';
+                    | 'networkAuthenticationRequired'
 
 export type HttpErrors = {
   HttpError: typeof HttpError;
   getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
   createError: (...args: UnknownError[]) => HttpError;
-} & Record<HttpErrorNames, (msg?: string) => HttpError>;
+} & Record<HttpErrorNames, (msg?: string) => HttpError>
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 declare const HttpErrors: HttpErrors
-export default HttpErrors;
+export default HttpErrors

@@ -6,8 +6,8 @@
   "type": "commonjs",
   "types": "types/index.d.ts",
   "scripts": {
-    "lint": "standard",
-    "lint:fix": "standard --fix",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "test": "npm run test:unit && npm run test:typescript",
     "test:typescript": "tsd",
     "test:unit": "tap"
@@ -31,8 +31,9 @@
   "devDependencies": {
     "@fastify/pre-commit": "^2.1.0",
     "@types/node": "^22.0.0",
+    "eslint": "^9.17.0",
     "fastify": "^5.0.0",
-    "standard": "^17.1.0",
+    "neostandard": "^0.12.0",
     "tap": "^18.7.1",
     "tsd": "^0.31.0"
   },
