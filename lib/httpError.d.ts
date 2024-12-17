@@ -101,5 +101,6 @@ export type HttpErrors = {
   createError: (...args: UnknownError[]) => HttpError;
 } & Record<HttpErrorNames, (msg?: string) => HttpError>
 
-declare const HttpErrors: httpErrors
-export default httpErrors
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+declare const HttpErrors: HttpErrors
+export default HttpErrors
