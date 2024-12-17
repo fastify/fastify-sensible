@@ -102,4 +102,4 @@ export type HttpErrors = {
 } & Record<HttpErrorNames, (msg?: string) => HttpError>
 
 declare const HttpErrors: httpErrors
-export default HttpErrors
+export default httpErrors
