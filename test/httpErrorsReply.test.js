@@ -13,7 +13,7 @@ test('Should generate the correct http error', t => {
       const fastify = Fastify()
       fastify.register(Sensible)
 
-      fastify.get('/', (req, reply) => {
+      fastify.get('/', (_req, reply) => {
         const name = normalize(code, statusCodes[code])
         t.equal(reply[name](), reply)
       })
@@ -51,7 +51,7 @@ test('Should generate the correct http error using getter', t => {
       const fastify = Fastify()
       fastify.register(Sensible)
 
-      fastify.get('/', (req, reply) => {
+      fastify.get('/', (_req, reply) => {
         t.equal(reply.getHttpError(code), reply)
       })
 
@@ -80,7 +80,7 @@ test('Should generate the correct http error (with custom message)', t => {
       const fastify = Fastify()
       fastify.register(Sensible)
 
-      fastify.get('/', (req, reply) => {
+      fastify.get('/', (_req, reply) => {
         const name = normalize(code, statusCodes[code])
         reply[name]('custom')
       })

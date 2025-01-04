@@ -10,7 +10,7 @@ expectAssignable<FastifySensibleOptions>({})
 expectAssignable<FastifySensibleOptions>({ sharedSchemaId: 'HttpError' })
 expectNotAssignable<FastifySensibleOptions>({ notSharedSchemaId: 'HttpError' })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.badRequest())
   expectAssignable<typeof reply>(reply.unauthorized())
   expectAssignable<typeof reply>(reply.paymentRequired())
@@ -52,22 +52,22 @@ app.get('/', (req, reply) => {
   expectAssignable<typeof reply>(reply.networkAuthenticationRequired())
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.getHttpError(405, 'Method Not Allowed'))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', () => {
   expectAssignable<HttpError>(app.httpErrors.createError(405, 'Method Not Allowed'))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', () => {
   expectAssignable<HttpError>(
     app.httpErrors.createError(405, 'Method Not Allowed')
   )
   expectAssignable<HttpError>(app.httpErrors.badRequest())
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async () => {
   expectAssignable<HttpError>(app.httpErrors.badRequest())
   expectAssignable<HttpError>(app.httpErrors.unauthorized())
   expectAssignable<HttpError>(app.httpErrors.paymentRequired())
@@ -109,7 +109,7 @@ app.get('/', async (req, reply) => {
   expectAssignable<HttpError>(app.httpErrors.networkAuthenticationRequired())
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async () => {
   expectType<void>(app.assert(1))
   expectType<void>(app.assert.ok(true))
   expectType<void>(app.assert.equal(1, 1))
@@ -120,38 +120,38 @@ app.get('/', async (req, reply) => {
   expectType<void>(app.assert.notDeepEqual({}, { a: 1 }))
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async () => {
   expectType<Promise<[Error, void]>>(app.to<void>(new Promise(resolve => resolve())))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.cacheControl('public'))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.preventCache())
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.cacheControl('max-age', 42))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectError(reply.cacheControl('foobar'))
 })
 
-app.get('/', (req, reply) => {
+app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.stale('while-revalidate', 42))
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async (_req, reply) => {
   expectType<void>(reply.vary('test'))
   expectType<void>(reply.vary(['test']))
   expectType<string>(reply.vary.append('X-Header', 'field1'))
   expectType<string>(reply.vary.append('X-Header', ['field1']))
 })
 
-app.get('/', async (req, reply) => {
+app.get('/', async (req) => {
   expectType<string[]>(req.forwarded())
   expectType<string | false | null>(req.is(['foo', 'bar']))
   expectType<string | false | null>(req.is('foo', 'bar'))

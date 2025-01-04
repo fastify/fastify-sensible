@@ -17,7 +17,7 @@ test('Should add shared schema', t => {
         400: { $ref: 'myError' }
       }
     },
-    handler: (req, reply) => {
+    handler: (_req, reply) => {
       reply.badRequest()
     }
   })
