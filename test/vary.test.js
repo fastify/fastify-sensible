@@ -13,7 +13,7 @@ test('reply.vary API', t => {
     const fastify = Fastify()
     fastify.register(Sensible)
 
-    fastify.get('/', (req, reply) => {
+    fastify.get('/', (_req, reply) => {
       reply.vary('Accept')
       reply.vary('Origin')
       reply.vary('User-Agent')
@@ -37,7 +37,7 @@ test('reply.vary API', t => {
     const fastify = Fastify()
     fastify.register(Sensible)
 
-    fastify.get('/', (req, reply) => {
+    fastify.get('/', (_req, reply) => {
       reply.header('Vary', ['Accept', 'Origin'])
       reply.vary('User-Agent')
       reply.send('ok')
@@ -61,7 +61,7 @@ test('reply.vary.append API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     t.equal(
       reply.vary.append('', ['Accept', 'Accept-Language']), 'Accept, Accept-Language'
     )

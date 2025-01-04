@@ -10,7 +10,7 @@ test('reply.cacheControl API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.cacheControl('public')
     reply.send('ok')
   })
@@ -32,7 +32,7 @@ test('reply.cacheControl API (multiple values)', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply
       .cacheControl('public')
       .cacheControl('max-age', 604800)
@@ -57,7 +57,7 @@ test('reply.preventCache API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.preventCache().send('ok')
   })
 
@@ -80,7 +80,7 @@ test('reply.stale API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.stale('while-revalidate', 42).send('ok')
   })
 
@@ -101,7 +101,7 @@ test('reply.stale API (multiple values)', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply
       .stale('while-revalidate', 42)
       .stale('if-error', 1)
@@ -125,7 +125,7 @@ test('reply.stale API (bad value)', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     try {
       reply.stale('foo', 42).send('ok')
       t.fail('Should throw')
@@ -152,7 +152,7 @@ test('reply.revalidate API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.revalidate().send('ok')
   })
 
@@ -173,7 +173,7 @@ test('reply.staticCache API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.staticCache(42).send('ok')
   })
 
@@ -194,7 +194,7 @@ test('reply.staticCache API (as string)', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.staticCache('42s').send('ok')
   })
 
@@ -215,7 +215,7 @@ test('reply.maxAge and reply.stale API', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply
       .maxAge(42)
       .stale('while-revalidate', 3)
@@ -239,7 +239,7 @@ test('reply.cacheControl API (string time)', t => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
-  fastify.get('/', (req, reply) => {
+  fastify.get('/', (_req, reply) => {
     reply.cacheControl('max-age', '1d')
     reply.send('ok')
   })
