@@ -154,7 +154,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.cacheControl`
-The `reply` interface is decorated an helper to configure cache control response headers.
+The `reply` interface is decorated with a helper to configure cache control response headers.
 ```js
 // configure a single type
 fastify.get('/', (req, reply) => {
@@ -245,7 +245,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `request.is`
-The `request` interface is decorated with [`jshttp/type-is`](https://github.com/jshttp/type-is), the API is the same, but you do not need to pass the request object:
+The `request` interface is decorated with [`jshttp/type-is`](https://github.com/jshttp/type-is), the API is the same but you do not need to pass the request object:
 ```js
 fastify.get('/', (req, reply) => {
   reply.send(req.is(['html', 'json']))
@@ -279,14 +279,13 @@ const [err, user] = await fastify.to(
 ```
 
 ## Contributing
-Do you feel there is some utility that *everyone can agree on* which is not present?<br>
+Do you feel there is some utility that *everyone can agree on* that is not present?<br>
 Open an issue and let's discuss it! Even better a pull request!
 
-## Acknowledgements
+## Acknowledgments
 
 The project name is inspired by [`vim-sensible`](https://github.com/tpope/vim-sensible), an awesome package that if you use vim you should use too.
 
 ## License
 
-MIT
-Copyright © Tomas Della Vedova & Fastify collaborators
+Licensed under [MIT](./LICENSE).
