@@ -93,13 +93,17 @@ declare namespace fastifySensible {
 
   export type HttpErrors = Errors.HttpErrors
   export type HttpErrorCodes = Errors.HttpErrorCodes
+  export type HttpErrorCodesLoose = Errors.HttpErrorCodesLoose
   export type HttpErrorNames = Errors.HttpErrorNames
+  export type HttpErrorTypes = Errors.HttpErrorTypes
 
   export const httpErrors: typeof Errors.default
 
   export type HttpErrorReplys = {
-    getHttpError: (code: HttpErrorCodes, message?: string) => FastifyReply;
-  } & Record<HttpErrorNames, (msg?: string) => FastifyReply>
+    getHttpError: (code: HttpErrorCodesLoose, message?: string) => FastifyReply;
+  } & {
+    [Property in keyof HttpErrorTypes]: (msg?: string) => FastifyReply
+  }
 
   export const fastifySensible: FastifySensible
   export { fastifySensible as default }

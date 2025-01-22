@@ -2,6 +2,7 @@ export declare class HttpError<N extends number = number> extends Error {
   status: N
   statusCode: N
   expose: boolean
+  message: string
   headers?: {
     [key: string]: string;
   };
@@ -11,95 +12,66 @@ export declare class HttpError<N extends number = number> extends Error {
 
 type UnknownError = Error | string | number | { [key: string]: any }
 
-export type HttpErrorCodes = 400 | '400' // BadRequest
-                    | 401 | '401' // Unauthorized
-                    | 402 | '402' // PaymentRequired
-                    | 403 | '403' // Forbidden
-                    | 404 | '404' // NotFound
-                    | 405 | '405' // MethodNotAllowed
-                    | 406 | '406' // NotAcceptable
-                    | 407 | '407' // ProxyAuthenticationRequired
-                    | 408 | '408' // RequestTimeout
-                    | 409 | '409' // Conflict
-                    | 410 | '410' // Gone
-                    | 411 | '411' // LengthRequired
-                    | 412 | '412' // PreconditionFailed
-                    | 413 | '413' // PayloadTooLarge
-                    | 414 | '414' // URITooLong
-                    | 415 | '415' // UnsupportedMediaType
-                    | 416 | '416' // RangeNotSatisfiable
-                    | 417 | '417' // ExpectationFailed
-                    | 418 | '418' // ImATeapot
-                    | 421 | '421' // MisdirectedRequest
-                    | 422 | '422' // UnprocessableEntity
-                    | 423 | '423' // Locked
-                    | 424 | '424' // FailedDependency
-                    | 425 | '425' // TooEarly
-                    | 426 | '426' // UpgradeRequired
-                    | 428 | '428' // PreconditionRequired
-                    | 429 | '429' // TooManyRequests
-                    | 431 | '431' // RequestHeaderFieldsTooLarge
-                    | 451 | '451' // UnavailableForLegalReasons
-                    | 500 | '500' // InternalServerError
-                    | 501 | '501' // NotImplemented
-                    | 502 | '502' // BadGateway
-                    | 503 | '503' // ServiceUnavailable
-                    | 504 | '504' // GatewayTimeout
-                    | 505 | '505' // HTTPVersionNotSupported
-                    | 506 | '506' // VariantAlsoNegotiates
-                    | 507 | '507' // InsufficientStorage
-                    | 508 | '508' // LoopDetected
-                    | 509 | '509' // BandwidthLimitExceeded
-                    | 510 | '510' // NotExtended
-                    | 511 | '511' // NetworkAuthenticationRequire
+export type HttpErrorTypes = {
+  badRequest: 400,
+  unauthorized: 401,
+  paymentRequired: 402,
+  forbidden: 403,
+  notFound: 404,
+  methodNotAllowed: 405,
+  notAcceptable: 406,
+  proxyAuthenticationRequired: 407,
+  requestTimeout: 408,
+  conflict: 409,
+  gone: 410,
+  lengthRequired: 411,
+  preconditionFailed: 412,
+  payloadTooLarge: 413,
+  uriTooLong: 414,
+  unsupportedMediaType: 415,
+  rangeNotSatisfiable: 416,
+  expectationFailed: 417,
+  imateapot: 418,
+  misdirectedRequest: 421,
+  unprocessableEntity: 422,
+  locked: 423,
+  failedDependency: 424,
+  tooEarly: 425,
+  upgradeRequired: 426,
+  preconditionRequired: 428,
+  tooManyRequests: 429,
+  requestHeaderFieldsTooLarge: 431,
+  unavailableForLegalReasons: 451,
+  internalServerError: 500,
+  notImplemented: 501,
+  badGateway: 502,
+  serviceUnavailable: 503,
+  gatewayTimeout: 504,
+  httpVersionNotSupported: 505,
+  variantAlsoNegotiates: 506,
+  insufficientStorage: 507,
+  loopDetected: 508,
+  bandwidthLimitExceeded: 509,
+  notExtended: 510
+  networkAuthenticationRequired: 511
+}
 
-export type HttpErrorNames = 'badRequest'
-                    | 'unauthorized'
-                    | 'paymentRequired'
-                    | 'forbidden'
-                    | 'notFound'
-                    | 'methodNotAllowed'
-                    | 'notAcceptable'
-                    | 'proxyAuthenticationRequired'
-                    | 'requestTimeout'
-                    | 'conflict'
-                    | 'gone'
-                    | 'lengthRequired'
-                    | 'preconditionFailed'
-                    | 'payloadTooLarge'
-                    | 'uriTooLong'
-                    | 'unsupportedMediaType'
-                    | 'rangeNotSatisfiable'
-                    | 'expectationFailed'
-                    | 'imateapot'
-                    | 'misdirectedRequest'
-                    | 'unprocessableEntity'
-                    | 'locked'
-                    | 'failedDependency'
-                    | 'tooEarly'
-                    | 'upgradeRequired'
-                    | 'preconditionRequired'
-                    | 'tooManyRequests'
-                    | 'requestHeaderFieldsTooLarge'
-                    | 'unavailableForLegalReasons'
-                    | 'internalServerError'
-                    | 'notImplemented'
-                    | 'badGateway'
-                    | 'serviceUnavailable'
-                    | 'gatewayTimeout'
-                    | 'httpVersionNotSupported'
-                    | 'variantAlsoNegotiates'
-                    | 'insufficientStorage'
-                    | 'loopDetected'
-                    | 'bandwidthLimitExceeded'
-                    | 'notExtended'
-                    | 'networkAuthenticationRequired'
+type ValueOf<ObjectType, ValueType extends keyof ObjectType = keyof ObjectType> = ObjectType[ValueType]
+
+export type HttpErrorNames = keyof HttpErrorTypes
+export type HttpErrorCodes = ValueOf<HttpErrorTypes>
+// Permissive type for getHttpError lookups
+export type HttpErrorCodesLoose = HttpErrorCodes | `${HttpErrorCodes}`
+// Helper to go from stringified error codes back to numeric
+type AsCode<T> = T extends `${infer N extends HttpErrorCodes}` ? N : never
 
 export type HttpErrors = {
   HttpError: typeof HttpError;
-  getHttpError: (code: HttpErrorCodes, message?: string) => HttpError;
+  getHttpError: <T extends HttpErrorCodesLoose>(code: T, message?: string) => HttpError<AsCode<T>>;
   createError: (...args: UnknownError[]) => HttpError;
-} & Record<HttpErrorNames, (msg?: string) => HttpError>
+} & {
+  [Property in keyof HttpErrorTypes]: (...args: UnknownError[]) => HttpError<HttpErrorTypes[Property]>
+}
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 declare const HttpErrors: HttpErrors
