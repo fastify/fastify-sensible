@@ -86,7 +86,7 @@ declare namespace fastifySensible {
      * })
      * ```
      */
-    sharedSchemaId?: string;
+    sharedSchemaId?: string | undefined;
   }
 
   export { HttpError }
