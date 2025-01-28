@@ -8,6 +8,7 @@ app.register(fastifySensible)
 
 expectAssignable<FastifySensibleOptions>({})
 expectAssignable<FastifySensibleOptions>({ sharedSchemaId: 'HttpError' })
+expectAssignable<FastifySensibleOptions>({ sharedSchemaId: undefined })
 expectNotAssignable<FastifySensibleOptions>({ notSharedSchemaId: 'HttpError' })
 
 app.get('/', (_req, reply) => {
