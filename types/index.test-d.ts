@@ -10,7 +10,6 @@ expectAssignable<FastifySensibleOptions>({})
 expectAssignable<FastifySensibleOptions>({ sharedSchemaId: 'HttpError' })
 expectNotAssignable<FastifySensibleOptions>({ notSharedSchemaId: 'HttpError' })
 
-
 app.get('/', (_req, reply) => {
   expectAssignable<typeof reply>(reply.badRequest())
   expectAssignable<typeof reply>(reply.unauthorized())
