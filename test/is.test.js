@@ -1,10 +1,10 @@
 'use strict'
 
-const { test } = require('tap')
+const { test } = require('node:test')
 const Fastify = require('fastify')
 const Sensible = require('../index')
 
-test('request.is API', t => {
+test('request.is API', (t, done) => {
   t.plan(3)
 
   const fastify = Fastify()
@@ -19,16 +19,17 @@ test('request.is API', t => {
     url: '/',
     payload: { foo: 'bar' }
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.same(
+    t.assert.ifError(err)
+    t.assert.equal(res.statusCode, 200)
+    t.assert.deepStrictEqual(
       res.payload,
       'json'
     )
+    done()
   })
 })
 
-test('request.is API (with array)', t => {
+test('request.is API (with array)', (t, done) => {
   t.plan(3)
 
   const fastify = Fastify()
@@ -43,11 +44,12 @@ test('request.is API (with array)', t => {
     url: '/',
     payload: { foo: 'bar' }
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.same(
+    t.assert.ifError(err)
+    t.assert.equal(res.statusCode, 200)
+    t.assert.deepStrictEqual(
       res.payload,
       'json'
     )
+    done()
   })
 })
