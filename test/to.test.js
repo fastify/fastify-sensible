@@ -4,38 +4,40 @@ const { test } = require('node:test')
 const Fastify = require('fastify')
 const Sensible = require('../index')
 
-test('Should nicely wrap promises (resolve)', t => {
+test('Should nicely wrap promises (resolve)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
+    t.assert.ifError(err)
 
     fastify.to(promise(true))
       .then(val => {
-        t.ok(Array.isArray(val))
-        t.notOk(val[0])
-        t.ok(val[1])
+        t.assert.ok(Array.isArray(val))
+        t.assert.ok(!val[0])
+        t.assert.ok(val[1])
+        done()
       })
   })
 })
 
-test('Should nicely wrap promises (reject)', t => {
+test('Should nicely wrap promises (reject)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
+    t.assert.ifError(err)
 
     fastify.to(promise(false))
       .then(val => {
-        t.ok(Array.isArray(val))
-        t.ok(val[0])
-        t.notOk(val[1])
+        t.assert.ok(Array.isArray(val))
+        t.assert.ok(val[0])
+        t.assert.ok(!val[1])
+        done()
       })
   })
 })
