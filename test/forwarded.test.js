@@ -22,7 +22,7 @@ test('request.forwarded API', (t, done) => {
     }
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
+    t.assert.strictEqual(res.statusCode, 200)
     t.assert.deepStrictEqual(
       JSON.parse(res.payload),
       ['127.0.0.1', '10.0.0.1', '10.0.0.2']
@@ -46,7 +46,7 @@ test('request.forwarded API (without header)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
+    t.assert.strictEqual(res.statusCode, 200)
     t.assert.deepStrictEqual(
       JSON.parse(res.payload),
       ['127.0.0.1']

@@ -21,12 +21,12 @@ test('Should generate the correct http error', (t, done) => {
       t.assert.ok(err instanceof HttpError)
       // `statusCodes` uses the capital T
       if (err.message === 'I\'m a Teapot') {
-        t.assert.equal(err.statusCode, 418)
+        t.assert.strictEqual(err.statusCode, 418)
       } else {
-        t.assert.equal(err.message, statusCodes[code])
+        t.assert.strictEqual(err.message, statusCodes[code])
       }
-      t.assert.equal(typeof err.name, 'string')
-      t.assert.equal(err.statusCode, Number(code))
+      t.assert.strictEqual(typeof err.name, 'string')
+      t.assert.strictEqual(err.statusCode, Number(code))
     })
 
     done()
@@ -40,7 +40,7 @@ test('Should expose the createError method from http-errors', (t, done) => {
 
   fastify.ready(err => {
     t.assert.ifError(err)
-    t.assert.equal(fastify.httpErrors.createError, createError)
+    t.assert.strictEqual(fastify.httpErrors.createError, createError)
     done()
   })
 })
@@ -54,9 +54,9 @@ test('Should generate the correct error using the properties given', (t, done) =
     t.assert.ifError(err)
     const customError = fastify.httpErrors.createError(404, 'This video does not exist!')
     t.assert.ok(customError instanceof HttpError)
-    t.assert.equal(customError.message, 'This video does not exist!')
-    t.assert.equal(typeof customError.name, 'string')
-    t.assert.equal(customError.statusCode, 404)
+    t.assert.strictEqual(customError.message, 'This video does not exist!')
+    t.assert.strictEqual(typeof customError.name, 'string')
+    t.assert.strictEqual(customError.statusCode, 404)
     done()
   })
 })
@@ -73,9 +73,9 @@ test('Should generate the correct http error (with custom message)', (t, done) =
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]('custom')
       t.assert.ok(err instanceof HttpError)
-      t.assert.equal(err.message, 'custom')
-      t.assert.equal(typeof err.name, 'string')
-      t.assert.equal(err.statusCode, Number(code))
+      t.assert.strictEqual(err.message, 'custom')
+      t.assert.strictEqual(typeof err.name, 'string')
+      t.assert.strictEqual(err.statusCode, Number(code))
     })
 
     done()
@@ -84,7 +84,7 @@ test('Should generate the correct http error (with custom message)', (t, done) =
 
 test('should throw error', (t) => {
   const err = Sensible.httpErrors.conflict('custom')
-  t.assert.equal(err.message, 'custom')
+  t.assert.strictEqual(err.message, 'custom')
 })
 
 function normalize (code, msg) {

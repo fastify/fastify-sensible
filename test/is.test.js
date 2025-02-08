@@ -20,7 +20,7 @@ test('request.is API', (t, done) => {
     payload: { foo: 'bar' }
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
+    t.assert.strictEqual(res.statusCode, 200)
     t.assert.deepStrictEqual(
       res.payload,
       'json'
@@ -45,7 +45,7 @@ test('request.is API (with array)', (t, done) => {
     payload: { foo: 'bar' }
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
+    t.assert.strictEqual(res.statusCode, 200)
     t.assert.deepStrictEqual(
       res.payload,
       'json'

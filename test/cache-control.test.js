@@ -20,9 +20,9 @@ test('reply.cacheControl API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'public')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -46,9 +46,9 @@ test('reply.cacheControl API (multiple values)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'public, max-age=604800, immutable')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=604800, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -68,11 +68,11 @@ test('reply.preventCache API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'no-store, max-age=0, private')
-    t.assert.equal(res.headers.pragma, 'no-cache')
-    t.assert.equal(res.headers.expires, '0')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'no-store, max-age=0, private')
+    t.assert.strictEqual(res.headers.pragma, 'no-cache')
+    t.assert.strictEqual(res.headers.expires, '0')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -92,9 +92,9 @@ test('reply.stale API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'stale-while-revalidate=42')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -117,9 +117,9 @@ test('reply.stale API (multiple values)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -145,9 +145,9 @@ test('reply.stale API (bad value)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
+    t.assert.strictEqual(res.statusCode, 200)
     t.assert.ok(!res.headers['cache-control'])
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -167,9 +167,9 @@ test('reply.revalidate API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'max-age=0, must-revalidate')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=0, must-revalidate')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -189,9 +189,9 @@ test('reply.staticCache API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -211,9 +211,9 @@ test('reply.staticCache API (as string)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -236,9 +236,9 @@ test('reply.maxAge and reply.stale API', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })
@@ -259,9 +259,9 @@ test('reply.cacheControl API (string time)', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 200)
-    t.assert.equal(res.headers['cache-control'], 'max-age=86400')
-    t.assert.equal(res.payload, 'ok')
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=86400')
+    t.assert.strictEqual(res.payload, 'ok')
     done()
   })
 })

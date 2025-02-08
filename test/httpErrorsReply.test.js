@@ -17,7 +17,7 @@ test('Should generate the correct http error', (t, rootDone) => {
 
       fastify.get('/', (_req, reply) => {
         const name = normalize(code, statusCodes[code])
-        t.assert.equal(reply[name](), reply)
+        t.assert.strictEqual(reply[name](), reply)
       })
 
       fastify.inject({
@@ -25,7 +25,7 @@ test('Should generate the correct http error', (t, rootDone) => {
         url: '/'
       }, (err, res) => {
         t.assert.ifError(err)
-        t.assert.equal(res.statusCode, Number(code))
+        t.assert.strictEqual(res.statusCode, Number(code))
         if (code === '425') {
           t.assert.deepStrictEqual(JSON.parse(res.payload), {
             error: 'Too Early',
@@ -61,7 +61,7 @@ test('Should generate the correct http error using getter', (t, rootDone) => {
       fastify.register(Sensible)
 
       fastify.get('/', (_req, reply) => {
-        t.assert.equal(reply.getHttpError(code), reply)
+        t.assert.strictEqual(reply.getHttpError(code), reply)
       })
 
       fastify.inject({
@@ -69,7 +69,7 @@ test('Should generate the correct http error using getter', (t, rootDone) => {
         url: '/'
       }, (err, res) => {
         t.assert.ifError(err)
-        t.assert.equal(res.statusCode, Number(code))
+        t.assert.strictEqual(res.statusCode, Number(code))
         t.assert.deepStrictEqual(JSON.parse(res.payload), {
           error: statusCodes[code],
           message: statusCodes[code],
@@ -106,7 +106,7 @@ test('Should generate the correct http error (with custom message)', (t, rootDon
         url: '/'
       }, (err, res) => {
         t.assert.ifError(err)
-        t.assert.equal(res.statusCode, Number(code))
+        t.assert.strictEqual(res.statusCode, Number(code))
         t.assert.deepStrictEqual(JSON.parse(res.payload), {
           error: statusCodes[code],
           message: 'custom',

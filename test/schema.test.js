@@ -27,7 +27,7 @@ test('Should add shared schema', (t, done) => {
     url: '/'
   }, (err, res) => {
     t.assert.ifError(err)
-    t.assert.equal(res.statusCode, 400)
+    t.assert.strictEqual(res.statusCode, 400)
     t.assert.deepStrictEqual(JSON.parse(res.payload), {
       error: statusCodes[400],
       message: statusCodes[400],

@@ -271,9 +271,9 @@ test('Should generate the correct http error', (t, done) => {
       fastify.assert(false, 400, 'Wrong!')
       t.assert.fail('Should throw')
     } catch (err) {
-      t.assert.equal(err.message, 'Wrong!')
-      t.assert.equal(err.name, 'BadRequestError')
-      t.assert.equal(err.statusCode, 400)
+      t.assert.strictEqual(err.message, 'Wrong!')
+      t.assert.strictEqual(err.name, 'BadRequestError')
+      t.assert.strictEqual(err.statusCode, 400)
     }
     done()
   })
