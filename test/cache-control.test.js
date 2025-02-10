@@ -1,10 +1,10 @@
 'use strict'
 
-const { test } = require('tap')
+const { test } = require('node:test')
 const Fastify = require('fastify')
 const Sensible = require('../index')
 
-test('reply.cacheControl API', t => {
+test('reply.cacheControl API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -19,14 +19,15 @@ test('reply.cacheControl API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'public')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.cacheControl API (multiple values)', t => {
+test('reply.cacheControl API (multiple values)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -44,14 +45,15 @@ test('reply.cacheControl API (multiple values)', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'public, max-age=604800, immutable')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=604800, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.preventCache API', t => {
+test('reply.preventCache API', (t, done) => {
   t.plan(6)
 
   const fastify = Fastify()
@@ -65,16 +67,17 @@ test('reply.preventCache API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'no-store, max-age=0, private')
-    t.equal(res.headers.pragma, 'no-cache')
-    t.equal(res.headers.expires, '0')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'no-store, max-age=0, private')
+    t.assert.strictEqual(res.headers.pragma, 'no-cache')
+    t.assert.strictEqual(res.headers.expires, '0')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.stale API', t => {
+test('reply.stale API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -88,14 +91,15 @@ test('reply.stale API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'stale-while-revalidate=42')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.stale API (multiple values)', t => {
+test('reply.stale API (multiple values)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -112,14 +116,15 @@ test('reply.stale API (multiple values)', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'stale-while-revalidate=42, stale-if-error=1')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.stale API (bad value)', t => {
+test('reply.stale API (bad value)', (t, done) => {
   t.plan(5)
 
   const fastify = Fastify()
@@ -128,9 +133,9 @@ test('reply.stale API (bad value)', t => {
   fastify.get('/', (_req, reply) => {
     try {
       reply.stale('foo', 42).send('ok')
-      t.fail('Should throw')
+      t.assert.fail('Should throw')
     } catch (err) {
-      t.ok(err)
+      t.assert.ok(err)
       reply.send('ok')
     }
   })
@@ -139,14 +144,15 @@ test('reply.stale API (bad value)', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.notOk(res.headers['cache-control'])
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.ok(!res.headers['cache-control'])
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.revalidate API', t => {
+test('reply.revalidate API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -160,14 +166,15 @@ test('reply.revalidate API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'max-age=0, must-revalidate')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=0, must-revalidate')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.staticCache API', t => {
+test('reply.staticCache API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -181,14 +188,15 @@ test('reply.staticCache API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.staticCache API (as string)', t => {
+test('reply.staticCache API (as string)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -202,14 +210,15 @@ test('reply.staticCache API (as string)', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'public, max-age=42, immutable')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'public, max-age=42, immutable')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.maxAge and reply.stale API', t => {
+test('reply.maxAge and reply.stale API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -226,14 +235,15 @@ test('reply.maxAge and reply.stale API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=42, stale-while-revalidate=3')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })
 
-test('reply.cacheControl API (string time)', t => {
+test('reply.cacheControl API (string time)', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
@@ -248,9 +258,10 @@ test('reply.cacheControl API (string time)', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.headers['cache-control'], 'max-age=86400')
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.headers['cache-control'], 'max-age=86400')
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })

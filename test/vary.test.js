@@ -1,13 +1,11 @@
 'use strict'
 
-const { test } = require('tap')
+const { test, describe } = require('node:test')
 const Fastify = require('fastify')
 const Sensible = require('../index')
 
-test('reply.vary API', t => {
-  t.plan(2)
-
-  t.test('accept string', t => {
+describe('reply.vary API', () => {
+  test('accept string', (t, done) => {
     t.plan(4)
 
     const fastify = Fastify()
@@ -24,14 +22,15 @@ test('reply.vary API', t => {
       method: 'GET',
       url: '/'
     }, (err, res) => {
-      t.error(err)
-      t.equal(res.statusCode, 200)
-      t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
-      t.equal(res.payload, 'ok')
+      t.assert.ifError(err)
+      t.assert.strictEqual(res.statusCode, 200)
+      t.assert.strictEqual(res.headers.vary, 'Accept, Origin, User-Agent')
+      t.assert.strictEqual(res.payload, 'ok')
+      done()
     })
   })
 
-  t.test('accept array of strings', t => {
+  test('accept array of strings', (t, done) => {
     t.plan(4)
 
     const fastify = Fastify()
@@ -47,22 +46,23 @@ test('reply.vary API', t => {
       method: 'GET',
       url: '/'
     }, (err, res) => {
-      t.error(err)
-      t.equal(res.statusCode, 200)
-      t.equal(res.headers.vary, 'Accept, Origin, User-Agent')
-      t.equal(res.payload, 'ok')
+      t.assert.ifError(err)
+      t.assert.strictEqual(res.statusCode, 200)
+      t.assert.strictEqual(res.headers.vary, 'Accept, Origin, User-Agent')
+      t.assert.strictEqual(res.payload, 'ok')
+      done()
     })
   })
 })
 
-test('reply.vary.append API', t => {
+test('reply.vary.append API', (t, done) => {
   t.plan(4)
 
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.get('/', (_req, reply) => {
-    t.equal(
+    t.assert.strictEqual(
       reply.vary.append('', ['Accept', 'Accept-Language']), 'Accept, Accept-Language'
     )
     reply.send('ok')
@@ -72,8 +72,9 @@ test('reply.vary.append API', t => {
     method: 'GET',
     url: '/'
   }, (err, res) => {
-    t.error(err)
-    t.equal(res.statusCode, 200)
-    t.equal(res.payload, 'ok')
+    t.assert.ifError(err)
+    t.assert.strictEqual(res.statusCode, 200)
+    t.assert.strictEqual(res.payload, 'ok')
+    done()
   })
 })

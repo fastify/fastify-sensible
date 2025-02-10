@@ -1,90 +1,90 @@
 'use strict'
 
-const { test } = require('tap')
+const { test } = require('node:test')
 const createError = require('http-errors')
 const statusCodes = require('node:http').STATUS_CODES
 const Fastify = require('fastify')
 const Sensible = require('../index')
 const HttpError = require('../lib/httpErrors').HttpError
 
-test('Should generate the correct http error', t => {
+test('Should generate the correct http error', (t, done) => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
+    t.assert.ifError(err)
 
     Object.keys(statusCodes).forEach(code => {
       if (Number(code) < 400) return
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]()
-      t.ok(err instanceof HttpError)
+      t.assert.ok(err instanceof HttpError)
       // `statusCodes` uses the capital T
       if (err.message === 'I\'m a Teapot') {
-        t.equal(err.statusCode, 418)
+        t.assert.strictEqual(err.statusCode, 418)
       } else {
-        t.equal(err.message, statusCodes[code])
+        t.assert.strictEqual(err.message, statusCodes[code])
       }
-      t.equal(typeof err.name, 'string')
-      t.equal(err.statusCode, Number(code))
+      t.assert.strictEqual(typeof err.name, 'string')
+      t.assert.strictEqual(err.statusCode, Number(code))
     })
 
-    t.end()
+    done()
   })
 })
 
-test('Should expose the createError method from http-errors', t => {
+test('Should expose the createError method from http-errors', (t, done) => {
+  t.plan(2)
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
-
-    t.equal(fastify.httpErrors.createError, createError)
-    t.end()
+    t.assert.ifError(err)
+    t.assert.strictEqual(fastify.httpErrors.createError, createError)
+    done()
   })
 })
 
-test('Should generate the correct error using the properties given', t => {
+test('Should generate the correct error using the properties given', (t, done) => {
+  t.plan(5)
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
+    t.assert.ifError(err)
     const customError = fastify.httpErrors.createError(404, 'This video does not exist!')
-    t.ok(customError instanceof HttpError)
-    t.equal(customError.message, 'This video does not exist!')
-    t.equal(typeof customError.name, 'string')
-    t.equal(customError.statusCode, 404)
-    t.end()
+    t.assert.ok(customError instanceof HttpError)
+    t.assert.strictEqual(customError.message, 'This video does not exist!')
+    t.assert.strictEqual(typeof customError.name, 'string')
+    t.assert.strictEqual(customError.statusCode, 404)
+    done()
   })
 })
 
-test('Should generate the correct http error (with custom message)', t => {
+test('Should generate the correct http error (with custom message)', (t, done) => {
   const fastify = Fastify()
   fastify.register(Sensible)
 
   fastify.ready(err => {
-    t.error(err)
+    t.assert.ifError(err)
 
     Object.keys(statusCodes).forEach(code => {
       if (Number(code) < 400) return
       const name = normalize(code, statusCodes[code])
       const err = fastify.httpErrors[name]('custom')
-      t.ok(err instanceof HttpError)
-      t.equal(err.message, 'custom')
-      t.equal(typeof err.name, 'string')
-      t.equal(err.statusCode, Number(code))
+      t.assert.ok(err instanceof HttpError)
+      t.assert.strictEqual(err.message, 'custom')
+      t.assert.strictEqual(typeof err.name, 'string')
+      t.assert.strictEqual(err.statusCode, Number(code))
     })
 
-    t.end()
+    done()
   })
 })
 
 test('should throw error', (t) => {
   const err = Sensible.httpErrors.conflict('custom')
-  t.equal(err.message, 'custom')
-  t.end()
+  t.assert.strictEqual(err.message, 'custom')
 })
 
 function normalize (code, msg) {
