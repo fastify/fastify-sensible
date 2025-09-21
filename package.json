@@ -58,7 +58,6 @@
     }
   ],
   "devDependencies": {
-    "@fastify/pre-commit": "^2.1.0",
     "@jsumners/line-reporter": "^1.0.1",
     "@types/node": "^24.0.8",
     "borp": "^0.20.0",
