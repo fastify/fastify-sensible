@@ -47,7 +47,7 @@ function fastifySensible (fastify, opts, next) {
         })
         break
       default:
-        fastify.decorateReply(httpError, function replyHttpError (message) {
+        fastify.decorateReply(httpError, function sensibleHttpError (message) {
           this.send(httpErrors[httpError](message))
           return this
         })
