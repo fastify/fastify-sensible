@@ -10,6 +10,7 @@ const assert = require('./lib/assert')
 const vary = require('./lib/vary')
 const cache = require('./lib/cache-control')
 
+/** @type {typeof import('./types/index').fastifySensible} */
 function fastifySensible (fastify, opts, next) {
   fastify.decorate('httpErrors', httpErrors)
   fastify.decorate('assert', assert)
@@ -68,6 +69,12 @@ function fastifySensible (fastify, opts, next) {
     })
   }
 
+  /**
+   * Wraps a promise for easier error handling without try/catch.
+   * @template T
+   * @param {Promise<T>} promise - The promise to wrap.
+   * @returns {Promise<[Error, undefined] | [null, T]>} A promise that resolves to a tuple containing either an error or the resolved data.
+   */
   function to (promise) {
     return promise.then(data => [null, data], err => [err, undefined])
   }
