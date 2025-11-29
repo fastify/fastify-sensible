@@ -16,11 +16,11 @@ function fastifySensible (fastify, opts, next) {
   fastify.decorate('assert', assert)
   fastify.decorate('to', to)
 
-  fastify.decorateRequest('forwarded', function () {
+  fastify.decorateRequest('forwarded', function requestForwarded () {
     return forwarded(this.raw)
   })
 
-  fastify.decorateRequest('is', function (types) {
+  fastify.decorateRequest('is', function requestIs (types) {
     return typeis(this.raw, Array.isArray(types) ? types : [types])
   })
 
@@ -42,16 +42,21 @@ function fastifySensible (fastify, opts, next) {
         // skip abstract class constructor
         break
       case 'getHttpError':
-        fastify.decorateReply('getHttpError', function (errorCode, message) {
+        fastify.decorateReply('getHttpError', function replyGetHttpError (errorCode, message) {
           this.send(httpErrors.getHttpError(errorCode, message))
           return this
         })
         break
-      default:
-        fastify.decorateReply(httpError, function (message) {
-          this.send(httpErrors[httpError](message))
-          return this
-        })
+      default: {
+        const capitalizedMethodName = httpError.replace(/(?:^|\s)\S/gu, a => a.toUpperCase())
+        const replyMethodName = 'sensible' + capitalizedMethodName
+        fastify.decorateReply(httpError, {
+          [replyMethodName]: function (message) {
+            this.send(httpErrors[httpError](message))
+            return this
+          }
+        }[replyMethodName])
+      }
     }
   }
 
