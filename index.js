@@ -33,7 +33,8 @@ function fastifySensible (fastify, opts, next) {
   fastify.decorateReply('maxAge', cache.maxAge)
 
   const httpErrorsKeys = Object.keys(httpErrors)
-  for (let i = 0; i < httpErrorsKeys.length; ++i) {
+  const httpErrorsKeysLength = httpErrorsKeys.length
+  for (let i = 0; i < httpErrorsKeysLength; ++i) {
     const httpError = httpErrorsKeys[i]
 
     switch (httpError) {
