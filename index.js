@@ -46,11 +46,16 @@ function fastifySensible (fastify, opts, next) {
           return this
         })
         break
-      default:
-        fastify.decorateReply(httpError, function sensibleHttpError (message) {
-          this.send(httpErrors[httpError](message))
-          return this
-        })
+      default: {
+        const capitalizedMethodName = httpError.replace(/(?:^|\s)\S/gu, a => a.toUpperCase())
+        const replyMethodName = 'sensible' + capitalizedMethodName
+        fastify.decorateReply(httpError, {
+          [replyMethodName]: function (message) {
+            this.send(httpErrors[httpError](message))
+            return this
+          }
+        }[replyMethodName])
+      }
     }
   }
 
