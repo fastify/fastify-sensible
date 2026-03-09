@@ -28,14 +28,14 @@ declare module 'fastify' {
   }
 
   interface Assert {
-    (condition: unknown, code?: number | string, message?: string): asserts condition;
-    ok(condition: unknown, code?: number | string, message?: string): asserts condition;
-    equal(a: unknown, b: unknown, code?: number | string, message?: string): void;
-    notEqual(a: unknown, b: unknown, code?: number | string, message?: string): void;
-    strictEqual<T>(a: unknown, b: T, code?: number | string, message?: string): asserts a is T;
-    notStrictEqual(a: unknown, b: unknown, code?: number | string, message?: string): void;
-    deepEqual(a: unknown, b: unknown, code?: number | string, message?: string): void;
-    notDeepEqual(a: unknown, b: unknown, code?: number | string, message?: string): void;
+    (condition: unknown, code: number, message?: string): asserts condition;
+    ok(condition: unknown, code: number, message?: string): asserts condition;
+    equal(a: unknown, b: unknown, code: number, message?: string): void;
+    notEqual(a: unknown, b: unknown, code: number, message?: string): void;
+    strictEqual<T>(a: unknown, b: T, code: number, message?: string): asserts a is T;
+    notStrictEqual(a: unknown, b: unknown, code: number, message?: string): void;
+    deepEqual(a: unknown, b: unknown, code: number, message?: string): void;
+    notDeepEqual(a: unknown, b: unknown, code: number, message?: string): void;
   }
 
   interface FastifyInstance {

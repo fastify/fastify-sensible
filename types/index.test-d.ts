@@ -114,14 +114,15 @@ app.get('/', async () => {
 })
 
 app.get('/', async () => {
-  expectType<void>(app.assert(1))
-  expectType<void>(app.assert.ok(true))
-  expectType<void>(app.assert.equal(1, 1))
-  expectType<void>(app.assert.notEqual(1, 2))
-  expectType<void>(app.assert.strictEqual(1, 1))
-  expectType<void>(app.assert.notStrictEqual(1, 2))
-  expectType<void>(app.assert.deepEqual({}, {}))
-  expectType<void>(app.assert.notDeepEqual({}, { a: 1 }))
+  expectError(app.assert(true))
+  expectType<void>(app.assert(1, 400, 'Bad number'))
+  expectType<void>(app.assert.ok(true, 400))
+  expectType<void>(app.assert.equal(1, 1, 400))
+  expectType<void>(app.assert.notEqual(1, 2, 400))
+  expectType<void>(app.assert.strictEqual(1, 1, 400))
+  expectType<void>(app.assert.notStrictEqual(1, 2, 400))
+  expectType<void>(app.assert.deepEqual({}, {}, 400))
+  expectType<void>(app.assert.notDeepEqual({}, { a: 1 }, 400))
 })
 
 app.get('/', async () => {
