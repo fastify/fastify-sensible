@@ -12,13 +12,13 @@ const app: FastifyInstance = fastify()
 app.register(fastifySensible)
 app.register(fastifyRateLimit)
 
-expect({}).type.toBeAssignableTo<FastifySensibleOptions>()
-expect({
+expect<FastifySensibleOptions>().type.toBeAssignableFrom({})
+expect<FastifySensibleOptions>().type.toBeAssignableFrom({
   sharedSchemaId: 'HttpError'
-}).type.toBeAssignableTo<FastifySensibleOptions>()
-expect({
+})
+expect<FastifySensibleOptions>().type.toBeAssignableFrom({
   sharedSchemaId: undefined
-}).type.toBeAssignableTo<FastifySensibleOptions>()
+})
 
 // codeql[js/missing-rate-limiting]
 app.get(
@@ -246,9 +246,7 @@ app.get(
 )
 
 app.get('/', async () => {
-  // @ts-expect-error: Expected 2-3 arguments, but got 1.
-  app.assert(true)
-
+  expect(app.assert).type.not.toBeCallableWith(true)
   expect(app.assert(1, 400, 'Bad number')).type.toBe<void>()
   expect(app.assert.ok(true, 400)).type.toBe<void>()
   expect(app.assert.equal(1, 1, 400)).type.toBe<void>()
@@ -280,8 +278,7 @@ app.get('/', (_req, reply) => {
 })
 
 app.get('/', (_req, reply) => {
-  // @ts-expect-error: Argument of type '"foobar"' is not assignable to parameter of type
-  reply.cacheControl('foobar')
+  expect(reply.cacheControl).type.not.toBeCallableWith('foobar')
 })
 
 app.get('/', (_req, reply) => {
