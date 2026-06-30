@@ -215,7 +215,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.stale`
-The `reply` interface is decorated with a helper to set the cache control header for [stale content](https://tools.ietf.org/html/rfc5861).
+The `reply` interface is decorated with a helper to set the cache control header for [stale content](https://datatracker.ietf.org/doc/html/rfc5861).
 ```js
 fastify.get('/', (req, reply) => {
   // the time can be defined as a string
@@ -226,7 +226,7 @@ fastify.get('/', (req, reply) => {
 ```
 
 #### `reply.maxAge`
-The `reply` interface is decorated with a helper to set max age of the response. It can be used in conjunction with `reply.stale`, see [here](https://web.dev/stale-while-revalidate/).
+The `reply` interface is decorated with a helper to set max age of the response. It can be used in conjunction with `reply.stale`, see [here](https://web.dev/case-studies/ads-case-study-stale-while-revalidate).
 ```js
 fastify.get('/', (req, reply) => {
   // the time can be defined as a string
