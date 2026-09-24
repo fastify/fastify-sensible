@@ -20,8 +20,11 @@ function fastifySensible (fastify, opts, next) {
     return forwarded(this.raw)
   })
 
-  fastify.decorateRequest('is', function requestIs (types) {
-    return typeis(this.raw, Array.isArray(types) ? types : [types])
+  fastify.decorateRequest('is', function requestIs (...types) {
+    const typeList = types.length === 1 && Array.isArray(types[0])
+      ? types[0]
+      : types
+    return typeis(this.raw, typeList)
   })
 
   fastify.decorateReply('vary', vary)
