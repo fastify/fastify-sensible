@@ -265,3 +265,37 @@ test('reply.cacheControl API (string time)', (t, done) => {
     done()
   })
 })
+
+test('reply.cacheControl API (invalid time)', async (t) => {
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.get('/', (_req, reply) => {
+    for (const time of ['forever', Number.NaN, Infinity, -1]) {
+      t.assert.throws(() => reply.cacheControl('max-age', time), {
+        message: 'The cache control time should be a non-negative number'
+      })
+    }
+    reply.send('ok')
+  })
+
+  const res = await fastify.inject({ method: 'GET', url: '/' })
+  t.assert.strictEqual(res.statusCode, 200)
+  t.assert.ok(!res.headers['cache-control'])
+})
+
+test('reply.staticCache API (invalid time)', async (t) => {
+  const fastify = Fastify()
+  fastify.register(Sensible)
+
+  fastify.get('/', (_req, reply) => {
+    t.assert.throws(() => reply.staticCache('forever'), {
+      message: 'The cache control time should be a non-negative number'
+    })
+    reply.send('ok')
+  })
+
+  const res = await fastify.inject({ method: 'GET', url: '/' })
+  t.assert.strictEqual(res.statusCode, 200)
+  t.assert.ok(!res.headers['cache-control'])
+})
