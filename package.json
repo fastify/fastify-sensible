@@ -73,7 +73,7 @@
     "fastify-plugin": "^6.0.0",
     "forwarded": "^0.2.0",
     "http-errors": "^2.0.0",
-    "type-is": "^2.0.1",
+    "type-is": "^3.0.0",
     "vary": "^1.1.2"
   },
   "publishConfig": {
